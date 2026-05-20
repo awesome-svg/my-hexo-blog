@@ -1,1 +1,24 @@
 /* Here is your custom css styles. */
+/*自定义全局字体*/
+
+@font-face {
+  font-family: 'myFont';
+  /*src: url('../font/Alibaba2.0CN-45R.ttf');*/
+  src: url('../font/Courier New Bold.ttf');
+}
+
+body {
+  font-family: 'myFont', sans-serif;
+}
+
+/*修改文章内容字体*/
+#articleContent {
+  font-family: 'Courier New Bold', sans-serif;
+}
+
+/*
+修改标题字体
+*/h1, h2, h3, h4, h5, h6 {
+  font-family: 'Courier New Bold', serif;
+  font-size: 25px;
+}
