@@ -292,7 +292,7 @@ gitalk:
     clientId: Ov23lifLBUDdVWmS5FJ2
     clientSecret: d175637b9f7cb173cab93b87d15db9c83712fc80
   admin: awesome-svg
-  #proxy: https://my-worker.1902408635.workers.dev/https://github.com/login/oauth/access_token
+  proxy: https://my-worker.1902408635.workers.dev/https://github.com/login/oauth/access_token
 
 
 
