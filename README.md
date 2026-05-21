@@ -34,7 +34,16 @@
 	</div> 
 	<script src="/js/snow.js"></script>
 	
-
+	
+	
+	
+	
+待完善功能：
+   1.天气设置
+   2.评论留言设置（gittalk代理设置）
+   
+	
+----------------------------------------------------------------
 天气
 <!-- 《添加“心知天气”-->
 <div id="tp-weather-widget"></div>
@@ -84,6 +93,7 @@
 
 
 
+//gittalk代理设置
 
 /*
 CORS Anywhere as a Cloudflare Worker!

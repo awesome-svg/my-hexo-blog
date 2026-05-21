@@ -116,4 +116,8 @@ permalink_pinyin:
   enable: true
   separator: '-' # default: '-'
   
-  
+#搜索
+search:
+  enable: true
+  path: search.xml
+  field: post
