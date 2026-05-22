@@ -34,7 +34,7 @@
 	</div> 
 	<script src="/js/snow.js"></script>
 	
-	
+测试404错误代码，不要在本地测试，部署到网页上
 	
 	
 	

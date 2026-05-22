@@ -4,11 +4,11 @@
 
 # Site
 title: Awesome的博客
-subtitle: ''
-description: 'Welcome to Zhang的Blog'
-keywords:
+subtitle: '改变吸引财富'
+description: '专注于Web,分享知识,记录生活'
+keywords: [HTML,CSS,JavaScript]
 author: Awesome
-language: zh-CN
+language: 'zh-CN'
 timezone: ''
 
 
@@ -44,6 +44,7 @@ external_link:
   enable: true # Open external links in new tab
   field: site # Apply to the whole site
   exclude: ''
+  
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
@@ -121,3 +122,11 @@ search:
   enable: true
   path: search.xml
   field: post
+  
+ #添加emoji表情支持
+githubEmojis:
+  enable: true
+  className: github-emoji
+  inject: true
+  styles:
+  customEmojis:
