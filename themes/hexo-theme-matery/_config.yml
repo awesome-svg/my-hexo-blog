@@ -29,22 +29,20 @@ menu:
   Navigate:
     url: /navigate
     icon: fas fa-location-arrow
-  # 二级菜单写法如下
-#  Medias:
-#    icon: fas fa-list
-#    children:
-#      - name: Musics
-#        url: /musics
-#        icon: fas fa-music
-#      - name: Movies
-#        url: /movies
-#        icon: fas fa-film
-#      - name: Books
-#        url: /books
- #       icon: fas fa-book
- #     - name: Galleries
- #       url: /galleries
- #       icon: fas fa-image
+ #二级菜单
+  Medias:
+    url: /medias
+    icon: fas fa-list
+    children:
+      - name: Musics
+        url: /musics
+        icon: fas fa-music
+      - name: Movies
+        url: /movies
+        icon: fas fa-film
+      - name: Books
+        url: /books
+        icon: fas fa-book-reader
 
 # Website start time.
 # 站点运行开始时间.
@@ -56,6 +54,7 @@ time:
   hour: 00 # 小时
   minute: 00 # 分钟
   second: 00 # 秒
+  
 
 # Index cover carousel configuration.
 # 首页封面轮播图的相关配置.
