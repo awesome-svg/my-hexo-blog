@@ -8,13 +8,13 @@
             <form name="f" action="https://www.baidu.com/" target="_blank">
                 <div id="Select-2">
                     <div class="Select-box-2" id="baidu">
-                        <ul style="height: 46px;">
+                        <ul style="height: 43px;">
                             <li class="this_s">百 · 度</li>
                             <li class="bing_s">必 · 应</li>
                             <li class="google_s">谷 · 歌</li>
                             <li class="baidu_s">百 · 度</li>
                         </ul>
-                    </div>
+					</div>
                     <input name="wd" id="kw-2" maxlength="100" autocomplete="off" type="text">
                 </div>
                 <div class="qingkong" id="qingkong" title="清 · 空" style="display: none;">x</div>
@@ -233,21 +233,21 @@
 </div>
 </main>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        /*font-family: "微软雅黑";*/
-    }
-	
 	@font-face {
 		font-family: 'myFont';
 		src: url('../font/Courier New Bold.ttf');
 	}
 
+    * {
+        margin: 0;
+        padding: 0;
+        /*font-family: "微软雅黑";*/
+		font-family: 'myFont', sans-serif;
+    }
 	body {
 		font-family: 'myFont', sans-serif;
 	}
-
+	
     ul,
     li,
     h1,
@@ -357,10 +357,10 @@
 
     .baidu-2 {
         width: 100%;
-        height: 110px;
+        height: 130px;
         margin: 0 auto;
         background: none;
-        padding-top: 50px;
+        padding-top: 20px;
     }
 
     .baidu-2 form {
@@ -373,42 +373,66 @@
         opacity: 0.9;
         font-size: 14px;
     }
+	
 
     #Select-2 {
         float: left;
     }
-
-    .Select-box-2 {
+	
+	.Select-box-2 {
+		height: 43px;
         text-align: center;
         float: left;
         position: relative;
-
+        display: inline-block;
     }
 
     .Select-box-2 ul {
-        height: 46px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		cursor: pointer;
+		list-style-type: none;
+        height: 43px;
         position: absolute;
         left: 0px;
         top: 1px;
         z-index: 9999;
         background: rgba(255, 255, 255, 0.9);
-        border: 1px solid #ccc;
+        #border: 1px solid #ccc;
         border-top: none;
-        overflow: hidden
+        overflow: hidden;
+		
+		
     }
 
     .Select-box-2 li {
         width: 60px;
-        line-height: 46px;
+        line-height: 43px;
         font-size: 14px;
+		#left: 1px;
+        #top: 1px;
         color: #484848;
-        border: 0;
+		#border: 1px solid #ccc; /* 边框样式 */
+		#border-radius: 1px; /* 边框圆角 */
+        #border: 0;
         cursor: pointer;
+		display: inline-block;
+        background-color: #f8f0f0;
+        #border-right: 1px solid #ccc;
+		
+
     }
+	
+	.Select-box-2 li:last-child {
+            #border-right: none;
+        }
 
     .Select-box-2 li:hover {
-        background: #3385ff;
+        #background: #3385ff;
         color: #FFF;
+		display: block; 
+		background-color: #e0e0e0;
     }
 
     .Select-box-2 .this_s {
@@ -422,42 +446,42 @@
 
     #kw-2 {
         width: 335px;
+		height: 43px;
         outline: 0;
         border: 1px solid #ccc;
         background: rgba(255, 255, 255, 0.2);
         color: #000000;
         padding-left: 70px;
-        font-weight: bold;
+        #font-weight: bold;
     }
 
-    /*修改搜索框样式*/
     #su-2 {
         width: 90px;
-        background: blue;
+		height: 43px;
+		border: 1px solid #ccc;
         border: none;
         border-top: #3385ff 1px solid;
         border-bottom: 1px solid #2d78f4;
-        color: #FFF;
+		color: white;
         cursor: pointer;
-        /*去轮廓阴影*/
         outline: none;
-
-   
-
+		padding: 10px 20px;
+        background-color: #007BFF;
+        border-radius: 3px;
     }
 
-    /*光标移动到搜索框颜色*/
     #su-2:hover {
-        background: blue;
-        border-bottom: 1px solid blue;
+		background-color: #0056b3;
+        border-bottom: 2px solid #0056b3;
     }
 
     #su-2:active {
-        background: blue;
+		background-color: #005630;
+        #background: blue;
         box-shadow: inset 1px 1px 3px blue;
         -webkit-box-shadow: inset 1px 1px 3px blue;
     }
-
+	
     .jj-list-tit {
         font-size: 16px;
         line-height: 25px;
@@ -549,7 +573,12 @@
         // 每天切换 banner 图.  Switch banner image every day.
         $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
     </script>
-<% } else { %>
+<% }  else if (theme.banner.url && theme.banner.url.length > 0) { %>
+<script>
+	//显示自己定义的图片
+    $('.bg-cover').css('background-image', 'url(<%- theme.jsDelivr.url %><%- url_for(theme.banner.url) %>)');
+</script>
+<% }else { %>
     <script>
         $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
     </script>

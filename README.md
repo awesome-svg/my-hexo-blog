@@ -266,3 +266,4 @@ addEventListener("fetch", async event => {
         }
     })());
 });
+

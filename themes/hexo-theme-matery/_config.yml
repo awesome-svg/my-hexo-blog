@@ -584,7 +584,7 @@ subtitle:
   typeSpeed: 100 # 打字速度
   backSpeed: 50 # 删除速度
   sub1: 从来没有真正的绝境, 只有心灵的迷途
-  sub2: Never really desperate, only the lost of the soul
+  sub2: Never really desperate, only the lost of the soul!
 
 # 手机二级菜单.
 navMenu:
@@ -596,9 +596,11 @@ instantpage:
   enable: true
 
 # banner 是否每日切换.
-# 若为 false, 则 banner 默认为 /medias/banner/0.jpg
+# 若为 false, 若url为空则 banner 默认显示/medias/banner/0.jpg,否则显示url指定
+
 banner:
-  enable: true
+  enable: false
+  url: /medias/banner/mypic.jpg
 
 #ICP备案信息尾部显示
 icp:
