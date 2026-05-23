@@ -140,18 +140,16 @@ indexbtn:
 socialLink:
   github:  https://github.com/awesome-svg
   email: 1902408635@qq.com
+  qq: 1902408635
+  weibo: https://weibo.com/u/8300151351
+  zhihu: https://www.zhihu.com/people/AwesoneZh
+  csdn: https://blog.csdn.net/AwesoneZh
+  jianshu: https://www.jianshu.com/u/1c0e846588f1
+  rss: true # true、false
   facebook: # https://www.facebook.com/xxx
   twitter: # https://twitter.com/xxx
-  qq: 1902408635
-  weixin: https://cdn.jsdelivr.net/gh/Yafine/Yafine-imgs/images/wechat.png
-  zhihu: #https://www.zhihu.com/people/xuan-tian-40-64/activities
-  csdn: #https://blog.csdn.net/victoryxa
-  jianshu: #https://www.jianshu.com/u/3b3856869772
-  weibo: # https://weibo.com/xxx
-  rss: true # true、false
   
  
-
 
 # Whether to activate the Post TOC, and Configure which title types are supported by TOC support.
 # You can add `toc: false` to the Front-matter of a post to turn off the TOC.
@@ -597,16 +595,15 @@ instantpage:
 
 # banner 是否每日切换.
 # 若为 false, 若url为空则 banner 默认显示/medias/banner/0.jpg,否则显示url指定
-
 banner:
   enable: false
   url: /medias/banner/mypic.jpg
 
 #ICP备案信息尾部显示
 icp:
-  enable: false
-  url: # 备案链接
-  text: # 备案信息
+  enable: true
+  url: https://beian.miit.gov.cn/ 
+  text: 渝ICP备XXXXXX号-X
 
 # CDN访问加速 
 # 第一次使用本功能，一定要先配置url，再`hexo cl && hexo g && hexo d`部署到GitHub的仓库，注意！必须是GitHub的仓库！
