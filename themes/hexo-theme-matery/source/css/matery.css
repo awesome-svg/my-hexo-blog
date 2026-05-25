@@ -362,9 +362,10 @@ header .side-nav .social-link {
 }
 
 .social-link a {
-    font-size: 1rem;
+    font-size: 1.1rem;
     display: inline;
-    padding: 0 12px;
+    /*padding: 0 12px;*/
+	margin: 0.4rem 0.5rem;
 }
 
 .cover-btns {
@@ -1687,7 +1688,7 @@ thead {
 .my-projects .title,
 .my-skills .title,
 .my-gallery .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 2.25rem;
 }
 
@@ -2138,3 +2139,4 @@ footer .copy-right {
     padding: 0;
     margin: 0;
 }
+

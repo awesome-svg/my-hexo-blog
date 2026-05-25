@@ -40,9 +40,12 @@ menu:
       - name: Movies
         url: /movies
         icon: fas fa-film
-      - name: Books
-        url: /books
+      - name: Library
+        url: /library
         icon: fas fa-book-reader
+      - name: Games
+        url: /games
+        icon: fab fa-itch-io
 
 # Website start time.
 # 站点运行开始时间.
@@ -213,7 +216,7 @@ clicklove:
 # profile in about page, including avatars, career, and personal introductions.
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
-  avatar: /medias/avatar.jpg
+  avatar: /medias/avatar.png
   career: Software Engineer
   introduction: If you wish to succeed, you should use persistence as your good friend, experience as your reference, prudence as your brother and hope as your sentry.
 

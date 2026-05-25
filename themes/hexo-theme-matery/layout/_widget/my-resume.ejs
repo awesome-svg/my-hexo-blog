@@ -1,0 +1,976 @@
+<%
+// the projects information of theme _config.yml.
+var myprojects = theme.myProjects.data;
+%>
+
+<div class="my-resume">
+	<div class="card-content article-card-content">
+		<div class="title center-align" data-aos="zoom-in-up">
+		 <i class="fa fa-address-book"></i>&nbsp;&nbsp;<%- __('个人简历') %>
+		</div>
+		<div id="resumeContent" data-aos="fade-up">
+	
+			<title>徐纯宇 - 个人简历</title>
+			<style>
+				@font-face {
+				  font-family: 'myFont';
+				  src: url('../../../source/font/Courier_New_Bold.ttf');
+				}
+
+				body {
+				  font-family: 'myFont', sans-serif;
+				}
+
+				/*修改文章内容字体*/
+				#resumeContent {
+				  font-family: 'myFont', sans-serif;
+				}
+								
+				* {
+					margin: 0;
+					padding: 0;
+					box-sizing: border-box;
+
+				}
+				
+				body {
+					//background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+					min-height: 100vh;
+					line-height: 1.6;
+				}
+				
+				.resume-container {
+					max-width: 1000px;
+					margin: 0 auto;
+					padding: 40px 20px;
+				}
+				
+				.resume-card {
+					background: white;
+					//border-radius: 5px;
+					//box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+					overflow: hidden;
+					animation: slideUp 0.6s ease-out;
+				}
+				
+				@keyframes slideUp {
+					from {
+						opacity: 0;
+						transform: translateY(30px);
+					}
+					to {
+						opacity: 1;
+						transform: translateY(0);
+					}
+				}
+				
+				.header-section {
+					//background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+					//color: white;
+					padding: 5px 30px 0 0 ;
+					margin:0;
+					position: relative;
+					align:center-align;
+					overflow: hidden;
+				}
+				
+				.header-section::before {
+					content: '';
+					position: absolute;
+					top: -50%;
+					right: -10%;
+					width: 300px;
+					height: 200px;
+					background: rgba(255, 255, 255, 0.1);
+					border-radius: 50%;
+				}
+				
+				.header-section::after {
+					content: '';
+					position: absolute;
+					//bottom: -30%;
+					left: -5%;
+					width: 200px;
+					height: 200px;
+					background: rgba(255, 255, 255, 0.05);
+					//border-radius: 50%;
+				}
+				
+				.avatar-container {
+					display: flex;
+					float: left;
+					width: 30%;
+					justify-content: center; /* 水平居中 */
+					z-index: 10;
+					margin-top: 20px;
+				}
+				
+				.avatar {
+					width: 150px;
+					height: 150px;
+					font-size: 13px;
+					border-radius: 50%;
+					border: 3px solid rgba(255, 255, 255, 0.3);
+					object-fit: cover;
+					transition: all 0.3s ease;
+					cursor: pointer;
+					justify-content: center; 
+				}
+				
+				.avatar:hover {
+					transform: scale(1.05);
+					border-color: rgba(255, 255, 255, 0.6);
+					box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+				}
+				
+				.quote-box {
+					padding: 5px 10px;
+					border-radius: 12px;
+					margin-top: 30px;
+					//margin-bottom: 30px;
+				}
+
+				.quote-text {
+					color: #92400e;
+					text-align: center;
+					font-size: 1.2rem;
+					line-height: 1.8;
+					//top: 20px;
+					border-bottom: 2px solid black;
+					padding-top:5px;
+					padding-bottom: 0px;
+				}
+				
+				.header-content {
+					position: relative;
+					z-index: 10;
+					float: left;
+					width: 70%;
+					line-height:20px;
+					
+				}
+	
+				.name-title {
+					font-size: 2rem;
+					font-weight: 700;
+					margin-bottom: 55px;
+					margin-left: 20%;
+					text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+				}
+				
+				.job-title {
+					font-size: 1.1rem;
+					font-weight: 300;
+					opacity: 0.9;
+					margin-left:16%;
+					margin-bottom: 28px;
+					margin-top: -25px;
+					
+				}
+				
+				.contact-info {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 20px;
+					font-size: 1.1rem;
+					opacity: 0.95;
+					margin-left:12%;
+					margin-bottom: 8px;
+					
+				}
+				
+				.contact-item {
+					display: flex;
+					align-items: center;
+					gap: 8px;
+					transition: all 0.3s ease;
+				}
+				.contact-item {
+					display: block;
+					align-items: center;
+					gap: 8px;
+					}
+				
+				.contact-item:hover {
+					transform: translateX(5px);
+					opacity: 1;
+				}
+				
+				.section-title {
+					font-size: 1.5rem;
+					font-weight: 700;
+					color: #1f2937;
+					position: relative;
+					padding-bottom: 15px;
+					border-bottom: 1px dashed #000;
+					text-align: center;		
+				}
+				
+				.section-title::before {
+					content: '';
+					position: absolute;
+					left: 0;
+					transform: translateY(-50%);
+					width: 6px;
+					height: 25px;
+					//background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+					border-radius: 3px;
+				}
+				
+				.content-section {
+					margin-top: 10px;
+					margin-bottom: 30px;
+				}
+				
+				.info-grid {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+					gap: 15px;
+					margin-left:35%;
+				}
+				.info-card {
+					padding: 2px;
+					display: flex;
+					align-items: right;
+				}
+				.info-label {
+					margin-right: 10px;
+					font-weight: bold;
+					font-size:15px;
+				}
+				.info-label::after {
+					content: '|';
+					margin-left: 10px;
+				}
+				.info-value {
+					font-size:15px;
+				}
+			
+				.info-card:hover {
+					transform: translateY(-3px);
+					//box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+				}
+				
+				.parent-container{
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+				}
+				
+				.skill-container {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+					gap: 10px;
+					margin-top: 10px;
+					margin-right: 66%;
+				}
+				
+				.skill-item {
+					position: relative;
+					width: 150px;
+					height: 150px;
+					margin: 0 25px;
+					border-radius: 50%;
+					//background: #2c3e50;
+					//box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+				}
+				
+				/* 不同百分比的圆环 */
+				.ring-93 {
+					--percentage: 0.93;
+					--color:yellow;
+				}
+
+				.ring-96 {
+					--percentage: 0.96;
+					--color:yellow;
+				}
+				.ring-98 {
+					--percentage: 0.98;
+					--color:yellow;
+				}
+
+				.ring-99 {
+					--percentage: 0.99;
+					--color:yellow;
+				}
+				
+				/* 创建外层圆环 */
+				.skill-item::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					border-radius: 50%;
+					background: conic-gradient(#3498db 0 93%, #ecf0f1 93% 100%);
+					/*background: conic-gradient(
+						#3498db 0% , 93% /* 使用CSS变量会更灵活，但此处直接写值 */
+						#ecf0f1 93% 100%
+					);*/
+					z-index: 1;
+				}
+
+				/* 创建内层白色圆 var(--percentage)*/
+				.skill-item::after {
+					content: '';
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					width: 80%;
+					height: 80%;
+					background: white;
+					border-radius: 50%;
+					z-index: 2;
+					//box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+				}
+				
+				/* 隐藏原始进度条 */
+				.progress-bar {
+					display: none;
+				}
+				
+				/* 居中显示技能名称和百分比 */
+				.skill-header {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					text-align: center;
+					z-index: 3;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					width: 70%;
+				}
+				
+				.skill-name {
+					font-size: 1.2rem;
+					font-weight: 700;
+					color: #2c3e50;
+					margin-bottom: 5px;
+					text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+				}
+				
+				.skill-percent {
+					font-size: 1.2rem;
+					font-weight: 700;
+					color: #3498db;
+				}
+				
+				/* 添加动画效果 */
+				.skill-item {
+					animation: fadeIn 0.8s ease-out, scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+				}
+				
+				.skill-list{
+					margin-top: 10px;
+					margin-left: -20px;
+				}
+				.skill-list li {
+					font-size: 15px;
+					margin-left：10px；
+					color: #4b5563;
+					line-height: 30px;
+					//transition: all 0.3s ease;
+				}
+				
+				.skill-list li:last-child {
+					border-bottom: none;
+				}
+				
+				.skill-list li:hover {
+					padding-left: 1px;
+					color: #2563eb;
+					background: #f8fafc;
+					border-radius: 2px;
+				}
+				
+				.timeline-item {
+					position: relative;
+					//padding-left: 40px;
+					//margin-bottom: 35px;
+					display: grid;
+					padding:2px;
+					grid-template-columns: 27%  73%;
+					grid-template-rows: 27%  73%;
+					gap: 0;
+				}
+
+				.timeline-summary {
+					width: 150px;
+					height: 150px;
+					border-radius: 50%;
+					position: relative;
+					display: grid;
+					grid-template-columns: repeat(1, 1fr);
+					justify-content: center;
+					align-items: center;
+					background-color: #409eff;
+					color: white;
+					margin-right: 2px;
+					margin-left: 50px; /* 仅为了演示间距 */
+					margin-top: 32px;
+					box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+					
+				  }
+				  
+				.timeline-summary::after {
+				  content: '';
+				  position: absolute;
+				  top: 0;
+				  right: 0;
+				  width: 1px; /* 竖线的宽度 */
+				  height: 100%;
+				  background-color: black; /* 竖线的颜色 */
+				}
+
+				.timeline-summary:last-child::after {
+				  display: none; /* 移除最后一个元素的竖线 */
+				}
+				  
+				.timeline-name {
+					font-size: 16px;
+					font-weight: bold;
+					text-align: center;
+					line-height: 1.4;
+				}
+				  
+				
+				.timeline-content {
+					//background: #f8fafc;
+					margin:0 5px 2px 0;
+					justify-content: center;
+					align-items: center;
+					font-size: 15px;
+					transition: all 0.3s ease;
+				}
+				
+				
+				.timeline-content:hover {
+					transform: translateX(10px);
+					box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1
+					
+				}
+
+				.timeline-header {
+					display: flex;
+					justify-content: space-between;
+					align-items: flex-start;
+					margin:-10px 5px 2px 15px;
+					padding:5px;
+					margin-bottom: 10px;
+					flex-wrap: wrap;
+					gap: 2px;
+				}
+				
+				.timeline-title {
+					font-size: 1.25rem;
+					font-weight: 700;
+					color: #1f2937;
+				}
+				
+				.timeline-period {
+					//background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+					color: white;
+					padding: 6px 16px;
+					border-radius: 20px;
+					font-size: 0.875rem;
+					font-weight: 600;
+				}
+				
+				.timeline-subtitle {
+					font-size: 1rem;
+					color: #6b7280;
+					margin-bottom: 12px;
+					font-weight: 500;
+				}
+				
+				.timeline-description {
+					color: #4b5563;
+					line-height: 1.8;
+				}
+				
+				.timeline-description p {
+					margin-bottom: 10px;
+				}
+				
+				.tag {
+					background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+					color: #1e40af;
+					padding: 2px 3px;
+					border-radius: 20px;
+					font-size: 15px;
+					font-weight: 500;
+					margin-left:30px;
+					transition: all 0.3s ease;
+				}
+				
+				.tag:hover {
+					background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+					color: white;
+					transform: translateY(-2px);
+				}
+				
+				.sidebar-nav {
+					position: fixed;
+					left: 20px;
+					top: 50%;
+					transform: translateY(-50%);
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+					z-index: 100;
+				}
+				
+				.nav-item {
+					width: 50px;
+					height: 50px;
+					#background: white;
+					border-radius: 50%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					cursor: pointer;
+					transition: all 0.3s ease;
+					#box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+					#color: #6b7280;
+					font-size: 1.25rem;
+				}
+				
+				.nav-item:hover,
+				.nav-item.active {
+					#background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+					#color: white;
+					transform: scale(1.1);
+				}
+				
+				.scroll-indicator {
+					position: absolute;
+					bottom: 30px;
+					left: 50%;
+					transform: translateX(-50%);
+					animation: bounce 2s infinite;
+				}
+				
+				@keyframes bounce {
+					0%, 20%, 50%, 80%, 100% {
+						transform: translateX(-50%) translateY(0);
+					}
+					40% {
+						transform: translateX(-50%) translateY(-10px);
+					}
+					60% {
+						transform: translateX(-50%) translateY(-5px);
+					}
+				}
+				
+				.scroll-arrow {
+					width: 30px;
+					height: 30px;
+					border-right: 3px solid white;
+					border-bottom: 3px solid white;
+					transform: rotate(45deg);
+					opacity: 0.8;
+				}
+				
+				@media print {
+					body {
+						background: white;
+					}
+					
+					.resume-container {
+						padding: 0;
+						max-width: 100%;
+					}
+					
+					.resume-card {
+						box-shadow: none;
+						border-radius: 0;
+					}
+					
+					.sidebar-nav,
+					.scroll-indicator {
+						display: none;
+					}
+				}
+				
+				@media (max-width: 768px) {
+					.header-section {
+						padding: 40px 20px;
+						text-align: center;
+					}
+					
+					.contact-info {
+						justify-content: center;
+					}
+					
+					.content-section {
+						padding: 30px 20px;
+					}
+					
+					.sidebar-nav {
+						display: none;
+					}
+					
+					.name-title {
+						font-size: 2rem;
+					}
+					
+					.avatar {
+						width: 140px;
+						height: 140px;
+					}
+				}
+			</style>
+
+		<body>
+			<nav class="sidebar-nav">
+				<div class="nav-item active" onclick="scrollToSection('home')" title="首页">
+					<i class="fas fa-home"></i>
+				</div>
+				<div class="nav-item" onclick="scrollToSection('about')" title="基本资料">
+					<i class="fas fa-user"></i>
+				</div>
+				<div class="nav-item" onclick="scrollToSection('skills')" title="专业技能">
+					<i class="fas fa-code"></i>
+				</div>
+				<div class="nav-item" onclick="scrollToSection('education')" title="教育经历">
+					<i class="fas fa-graduation-cap"></i>
+				</div>
+				<div class="nav-item" onclick="scrollToSection('experience')" title="工作经验">
+					<i class="fas fa-briefcase"></i>
+				</div>
+			</nav>
+
+			<div class="resume-container">
+				<div class="resume-card">
+			
+					<header class="header-section" id="home">
+						<div class="flex flex-col md:flex-row items-center gap-8">
+							<div class="avatar-container">
+								<img src="/medias/avatar.png" alt="徐纯宇" class="avatar">
+							</div>
+							
+							<div class="header-content flex-1">
+								<h1 class="name-title">徐纯宇</h1>
+								<div class="job-title">全栈工程师 | 十年开发经验</div>
+								<div class="contact-info">
+									<div class="contact-item">
+										<i class="fas fa-phone"></i>
+										<span>13300000000</span>
+									</div>
+									<div class="contact-item">
+										<i class="fas fa-envelope"></i>
+										<span>1376174032@qq.com</span>
+									</div>
+									<div class="contact-item">
+										<i class="fas fa-map-marker-alt"></i>
+										<span>北京市海淀区</span>
+									</div>
+								</div>
+							</div>
+							<div class="quote-box">
+								<p class="quote-text">
+									业精于勤，荒于嬉；行成于思，毁于随。
+								</p>
+							</div>
+						</div>
+						<div class="scroll-indicator">
+							<div class="scroll-arrow"></div>
+						</div>
+					</header>
+
+					<section class="content-section" id="about">
+						<h2 class="section-title">基本资料</h2>
+						<div class="quote-box" style="margin:-10px 0 20px 0;">
+							<p class="quote-text" style="color: #1e40af;margin:-2px 20px 0 30px;padding-bottom:3px;">
+								
+								毕业于北京理工大学的计算机应用专业。从业十年有余，熟悉 C# 和 Java 前后端开发，熟悉 Oracle 和 MySQL 数据库，熟悉 HTML 和 JS 及 CSS 前端开发，熟悉 UniApp 跨平台开发小程序和 App。
+							</p>
+						</div>
+						
+						<div class="avatar-container">
+								<img src="/medias/avatar.png" alt="徐纯宇" class="avatar">
+							</div>
+						<div class="info-grid">
+							<div class="info-card">
+								<div class="info-label">姓名</div>
+								<div class="info-value">徐纯宇</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">性别</div>
+								<div class="info-value">男</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">出生年月</div>
+								<div class="info-value">1992.02.20</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">手机号码</div>
+								<div class="info-value">13300000000</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">电子邮箱</div>
+								<div class="info-value">1376174032@qq.com</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">QQ 号码</div>
+								<div class="info-value">1376174032</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">居住地址</div>
+								<div class="info-value">北京市海淀区</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">户籍地址</div>
+								<div class="info-value">北京市海淀区</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">学历</div>
+								<div class="info-value">本科</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">毕业院校</div>
+								<div class="info-value">北京理工大学</div>
+							</div>
+							<div class="info-card">
+								<div class="info-label">专业</div>
+								<div class="info-value">计算机应用</div>
+							</div>
+						</div>
+
+					</section>
+
+			
+					<section class="content-section" id="skills" >
+						<h2 class="section-title">专业技能</h2>
+						<div class="quote-box">
+							<p class="quote-text" style="color: #92400e;margin:-20px 20px 20px 30px;padding-bottom:3px;font-size: 1.1rem;">
+								<i class="fas fa-lightbulb mr-3"></i>
+								长年累月后，精进又向前。唯有勤学练，擅长最优先。
+							</p>
+						</div>
+						<div class="parent-container">
+							<div class="skill-container">
+								<div class="skill-item">
+									<div class="skill-header">
+										<span class="skill-name">C#</span>
+										<span class="skill-percent">98%</span>
+									</div>
+									<div class="progress-bar">
+										<div class="progress-fill ring-98" style="width: 98%;"></div>
+									</div>
+								</div>
+
+								<div class="skill-item">
+									<div class="skill-header">
+										<span class="skill-name">Java</span>
+										<span class="skill-percent">93%</span>
+									</div>
+									<div class="progress-bar">
+										<div class="progress-fill ring-93" style="width: 93%;"></div>
+									</div>
+								</div>
+
+								<div class="skill-item">
+									<div class="skill-header">
+										<span class="skill-name">HTML/CSS</span>
+										<span class="skill-percent">96%</span>
+									</div>
+									<div class="progress-bar">
+										<div class="progress-fill ring-96" style="width: 96%;"></div>
+									</div>
+								</div>
+
+								<div class="skill-item">
+									<div class="skill-header">
+										<span class="skill-name">Oracle</span>
+										<span class="skill-percent">99%</span>
+									</div>
+									<div class="progress-bar">
+										<div class="progress-fill  ring-99" style="width: 99%;"></div>
+									</div>
+								</div>
+							</div>
+
+							<ol class="skill-list">
+								<li>熟练使用 Java，基于 SSH 能快速搭建系统框架</li>
+								<li>熟练使用 Java，基于 Spring Boot 能快速搭建系统框架</li>
+								<li>熟练使用 HTML/CSS 技术，精通 JS/jQuery 编程，能够熟练使用 AngularJS、Vue、ReactJS 等前端框架</li>
+								<li>熟悉 Oracle、MySQL、SQLServer 等各平台安装使用，熟练使用 SQL 语句增删改查，触发器，存储过程，索引，序列</li>
+								<li>熟练的使用 Grunt、Gulp 等前端工具</li>
+								<li>熟悉 C# 语言研发，基于 ASP.NET MVC 能快速搭建系统框架，新技术 ASP.NET Core 做后台数据服务能快速搭建，跨平台使用</li>
+								<li>熟悉 C# 语言研发，基于 WinForm 的 C/S 应用程序能快速搭建框架</li>
+							</ol>
+						</div>
+					</section>
+
+				
+					<section class="content-section" id="education">
+				
+						<h2 class="section-title">教育经历</h2>
+						<div class="quote-box" style="">
+							<p class="quote-text" style="color: #065f46;margin:-20px 20px 25px 30px;padding-bottom:3px;">
+								<i class="fas fa-book-open mr-3"></i>
+								学则智，不学则愚；学则治，不学则乱。自古圣贤，成大业，未有不由学而成者。
+							</p>
+						</div>
+						<div class="timeline-item">
+							<div class="timeline-summary">
+									<span class="timeline-name">4年北京理工大学</span>	
+							</div>
+							<div class="timeline-content">
+								
+								<div class="timeline-header">
+									<h3 class="timeline-title">北京理工大学</h3>
+									<span class="timeline-period">2008/06 - 2012/06</span>
+								</div>
+								<p class="timeline-subtitle"><i class="fas fa-award mr-2"></i>计算机应用专业 | 本科</p>
+								<div class="timeline-description">
+								<p>学习技能:</p>
+								<p>大学四年时间完成了所有的学业，并参与了很多项目研发工作，配合老师和同学攻关了很多难题。</p>
+								<ol class="tag">
+									<li>掌握了办公五剑客，Word,PPT,Excel,PS,Visio。</li>
+									<li>掌握了C#和Java的前后端开发，数据库基本运用。</li>
+								</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="timeline-item">
+							<div class="timeline-summary">
+								<span class="timeline-name">1年Java培训班</span>	
+							</div>
+							<div class="timeline-content">
+								<div class="timeline-header">
+									<h3 class="timeline-title">Java 培训班</h3>
+									<span class="timeline-period">2011/05 - 2012/04</span>
+								</div>
+								<p class="timeline-subtitle"><i class="fas fa-certificate mr-2"></i>Java 全栈开发培训</p>
+								<div class="timeline-description">
+								<p>学习技能:</p>
+								<p>参加了一年的 JAVA 培训班，跟着老师一起做了多个项目。积累了很多经验，有了很多经历。</p>
+								<ol class="tag">
+									<li>掌握了Spring Boot框架下的api开发，并开发了一套自己的数据接口。</li>
+									<li>掌握了ssm框架下的前后端开发，并开发了自己的博客。</li>
+								</ol>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					
+					<section class="content-section" id="experience">
+			
+						<h2 class="section-title">工作经验</h2>
+						<div class="quote-box" style="">
+							<p class="quote-text" style="color: #991b1b;">
+								<i class="fas fa-fire mr-3"></i>
+								生命，需要我们去努力。年轻时，我们要努力锻炼自己的能力，掌握知识、掌握技能、掌握必要的社会经验。
+							</p>
+						</div>
+						<div class="timeline-item">
+							<div class="timeline-summary">
+									<span class="timeline-name">22个月汽车之家官网</span>	
+							</div>
+							<div class="timeline-content">
+								<div class="timeline-header">
+									<h3 class="timeline-title">汽车之家官网</h3>
+									<span class="timeline-period">开发时间:  2019/12 - 2021/10 (22 个月)</span>
+								</div>
+								<p class="timeline-subtitle"><i class="fas fa-tools mr-2"></i>开发工具：VS2015, VSCode, Oracle</p>
+								<div class="timeline-description">
+									<p><strong>项目描述：</strong>参与与客户交流需求，参与项目整体开发，主要负责首页面各方面数据综合显示，系统采用预加载，通过 WCF 对硬件控制，实时更新，一些页面设计，数据库的设计，数据测试。</p>
+									<ul class="tag">
+										<li>1.数据信息展示块 2.软硬件交互块 3.数据解析块</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="timeline-item">
+							<div class="timeline-summary">
+								<span class="timeline-name">8个月联想后台研究</span>	
+							</div>
+							<div class="timeline-content">
+								<div class="timeline-header">
+									<h3 class="timeline-title">联想后台研发</h3>
+									<span class="timeline-period">2021/10 - 2022/06 (8 个月)</span>
+								</div>
+								<p class="timeline-subtitle"><i class="fas fa-tools mr-2"></i>开发工具：IDEA, VSCode, MySQL</p>
+								<div class="timeline-description">
+									<p><strong>项目描述：</strong>参与与客户交流需求，参与项目整体开发，主要负责首页面各方面数据综合显示，系统采用预加载，实时更新，一些页面设计，数据库的设计，数据测试。</p>
+									<ul class="tag">
+										<li>1.设备基础信息 2.部门信息 3.用户信息 4.数据报表  5.调试工具 6.数据监测 7.权限管理等7大功能块，
+										系统采用角色分配，操作分配等权限，实现各个角色的权限功能，精确划分各个部门的职责。</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<script>
+
+			
+		let skillsAnimated = true;
+		
+		function animateSkills() {
+			if (skillsAnimated) return;
+			
+			const skillsSection = document.getElementById('skills');
+			if (!skillsSection) return;
+			
+			const sectionTop = skillsSection.offsetTop;
+			const sectionHeight = skillsSection.clientHeight;
+			const viewportTop = window.pageYOffset;
+			const viewportHeight = window.innerHeight;
+			
+		
+			if (viewportTop + viewportHeight * 0.75 >= sectionTop) {
+				skillsAnimated = true;
+				
+				const skillItems = document.querySelectorAll('.skill-item');
+				const progressBars = document.querySelectorAll('.progress-fill');
+				
+
+				skillItems.forEach((item, index) => {
+					setTimeout(() => {
+						item.classList.add('animated');
+					}, index * 150);
+				});
+				
+				progressBars.forEach((bar, index) => {
+					const targetWidth = bar.getAttribute('data-width');
+					setTimeout(() => {
+						bar.style.width = targetWidth;
+						bar.classList.add('animate');
+					}, 300 + index * 150);
+				});
+			}
+		}
+
+				window.addEventListener('load', () => {
+					const progressBars = document.querySelectorAll('.progress-fill');
+					progressBars.forEach(bar => {
+						const width = bar.style.width;
+						bar.setAttribute('data-width', width);
+						bar.style.width = '0';
+					});
+					
+					animateSkills();
+				});
+
+				window.addEventListener('scroll', () => {
+					animateSkills();
+				});
+			</script>
+		</body>
+			
+		</div>
+	</div>
+</div>
