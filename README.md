@@ -46,6 +46,48 @@
    1.天气设置
    2.评论留言设置（gittalk代理设置）
    3.简历页面的圆环百分比显示(自定义变量没有用)
+   4.简历增加侧边快速导航功能
+	<nav class="sidebar-nav">
+        <div class="nav-item active" onclick="scrollToSection('home')" title="首页">
+            <i class="fas fa-home"></i>
+        </div>
+        <div class="nav-item" onclick="scrollToSection('about')" title="基本资料">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="nav-item" onclick="scrollToSection('skills')" title="专业技能">
+            <i class="fas fa-code"></i>
+        </div>
+        <div class="nav-item" onclick="scrollToSection('education')" title="教育经历">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="nav-item" onclick="scrollToSection('experience')" title="工作经验">
+            <i class="fas fa-briefcase"></i>
+        </div>
+    </nav>
+	
+	
+	
+	
+	--------------------------------------
+可增加功能：
+	 加入图片懒加载功能，在根目录配置文件开启和关闭
+	增加留言板功能
+	在关于板块,加入简历功能页
+	增加视听[视觉听觉影音]板块
+	支持emoji表情，用markdown emoji语法书写直接生成对应的能跳跃的表情。
+	增加网站运行时间显示
+	增加动漫模型
+	整体替换Banner图片和文章特色图片
+	增加分类相册功能
+	去掉标签页,将其合并至分类页中
+	修改了一些控件的参数
+	添加页面樱花飘落动效
+	添加鼠标点击烟花爆炸动效
+	加入天气接口控件
+	加入鼠标点击文字特效
+	添加页面雪花飘落动效
+	添加在线聊天插件
+
    
 	
 ----------------------------------------------------------------

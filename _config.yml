@@ -102,6 +102,10 @@ include:
 exclude:
 ignore:
 
+
+
+plugins:
+  - hexo-douban
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
@@ -130,3 +134,29 @@ githubEmojis:
   inject: true
   styles:
   customEmojis:
+  
+  
+douban:
+  id: 295283474  #这个需要修改为你个人的id
+  user: AweSone 
+  builtin: true
+  customize_layout: douban
+  dynamic: false
+  item_per_page: 6
+  meta_max_line: 4
+  book:
+      title: '书单｜My books'
+      quote: '那些读过的书，终将成为你的气质和风骨!'
+  movie:
+      title: '片单｜My movies'
+      quote: '看过的电影，现在你还记得吗?'
+  games:
+      title: 'My Games'
+      quote: '这些游戏你不能不知道' 
+  timeout: 30000
+
+
+douban_card:
+  enable: false
+  api_key: YOUR_API_KEY
+  user_id: 295283474

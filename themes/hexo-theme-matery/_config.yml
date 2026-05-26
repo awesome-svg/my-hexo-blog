@@ -40,12 +40,9 @@ menu:
       - name: Movies
         url: /movies
         icon: fas fa-film
-      - name: Library
-        url: /library
+      - name: Books
+        url: /books
         icon: fas fa-book-reader
-      - name: Games
-        url: /games
-        icon: fab fa-itch-io
 
 # Website start time.
 # 站点运行开始时间.
