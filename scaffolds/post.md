@@ -1,7 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-author: 
+author: Awesone
 img: 
 top: false
 cover: false
@@ -10,6 +10,10 @@ password:
 summary: 
 categories: 
 tags: 
+comments: true
+toc: true
+copyright: true
+
 ---
 
 <!-- 在此处开始撰写正文 -->

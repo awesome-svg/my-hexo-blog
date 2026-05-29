@@ -303,14 +303,14 @@ postCalendar: true
 gitalk:
   enable: true
   owner: awesome-svg
-  id: 'location.href' 
+  id: 
   labels: 'gitalk'
   repo: blogtalk
   oauth:
     clientId: Ov23lifLBUDdVWmS5FJ2
     clientSecret: d175637b9f7cb173cab93b87d15db9c83712fc80
-  admin: awesome-svg
-  proxy: https://my-worker.1902408635.workers.dev/https://github.com/login/oauth/access_token
+  admin: [awesome-svg]
+  proxy: 
 
 
 

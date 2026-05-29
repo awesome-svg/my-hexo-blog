@@ -38,6 +38,18 @@ body {
     height: 15px;
 }
 
+/* 修改文章正文字体大小 */
+.post-content p, 
+.post-content li, 
+.post-content span {
+    font-size: 16px !important; /* 这里修改为你想要的大小，如 16px, 18px, 20px */
+    line-height: 1.8 !important; /* 建议同时调整行高，阅读更舒适 */
+}
+
+/* 如果希望标题也变大，可以单独设置 */
+.post-content h1 { font-size: 1.7rem !important; }
+.post-content h2 { font-size: 1.5rem !important; }
+.post-content h3 { font-size: 1.4rem !important; }
 
 
 
