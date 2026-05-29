@@ -42,8 +42,8 @@
 	//显示自己定义的图片
     $('.bg-cover').css('background-image', 'url(<%- theme.jsDelivr.url %><%- url_for(theme.banner.url) %>)');
 </script>
-<% }else { %>
-<script>//默认显示
+<% } else { %>
+<script>
     $('.bg-cover').css('background-image', 'url(<%- theme.jsDelivr.url %><%- url_for('/medias/banner/0.jpg') %>)');
 </script>
 <% } %>

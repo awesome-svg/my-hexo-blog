@@ -301,7 +301,7 @@ postCalendar: true
 # the Gitalk config，default disabled
 # Gitalk 评论模块的配置，默认为不激活
 gitalk:
-  enable: true
+  enable: false
   owner: awesome-svg
   id: 
   labels: 'gitalk'
@@ -335,6 +335,40 @@ disqus:
 livere:
   enable: false
   uid:
+  
+
+
+# Waline 评论系统配置
+# ----------------------
+waline:
+  enable: true                  # 开启评论
+  serverURL:  'https://waline.personyzh.cn' # ⚠️ 务必替换为你的后端地址
+  lang: zh-CN                   # 语言：zh-CN, en, jp, etc.
+  
+  # --- 基础体验 ---
+  visitor: true                 # 是否显示文章阅读量统计
+  pageview: true                # 是否开启页面访问量统计
+  emoji:                        # 表情包集合 (可多选)
+    - https://unpkg.com/@waline/emojis@1.0.1/weibo
+    - https://unpkg.com/@waline/emojis@1.0.1/alus
+    - https://unpkg.com/@waline/emojis@1.0.1/bilibili
+  meta: ['nick', 'mail', 'link'] # 评论者填写的信息字段
+  requiredMeta: ['nick', 'mail'] # 必填字段建议只选 nick 和 mail，降低门槛
+  
+  # --- 高级功能 ---
+  login: enable                 # 登录模式: enable(允许), disable(禁止), force(强制登录才能评)
+  wordLimit: 500                # 字数限制，0为不限制
+  pageSize: 10                  # 每页显示评论数
+  imageUploader: true           # 是否允许上传图片 (依赖后端配置)
+  texRenderer: false            # 是否开启 LaTeX 公式渲染 (技术博客建议 true)
+  search: true                  # 是否开启评论搜索
+  
+  # --- 安全与防刷 ---
+  turnstileKey: ""              # Cloudflare Turnstile 密钥 (防机器人，可选)
+  recaptchaV3Key: ""            # Google reCAPTCHA v3 密钥 (防机器人，可选)
+
+  
+  
 
 # The configuration of the Valine comment module is not activated by default.
 # To use it, activate the configuration item and set appId and appKey.
@@ -350,6 +384,8 @@ valine:
   pageSize: 10
   placeholder: 'just go go' # Comment Box placeholder
   background: /medias/comment_bg.png
+  
+  
 
 # The configuration of the MiniValine comment module is not activated by default.
 # To use it, activate the configuration item and set appId and appKey.

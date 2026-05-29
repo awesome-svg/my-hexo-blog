@@ -53,3 +53,93 @@ body {
 
 
 
+/* =========================================
+   Waline v3评论系统自定义样式 (适配 Matery 主题)
+   ========================================= */
+
+/* Waline 整体容器美化 */
+#waline {
+    --waline-theme-color: #49b1f5; /* 主色调，可改为 Matery 的主题色 */
+    --waline-active-color: #ff7242; /* 激活颜色 */
+    --waline-border-radius: 12px; /* 圆角大小 */
+    --waline-card-bg: #fff; /* 卡片背景 */
+    --waline-info-bg: #f7f9fe; /* 信息栏背景 */
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] #waline {
+    --waline-card-bg: #1f1f1f;
+    --waline-info-bg: #2d2d2d;
+    --waline-border-color: #333;
+}
+
+/* 评论输入框区域 */
+.wl-panel {
+    border-radius: var(--waline-border-radius) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.wl-panel:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 输入框内部美化 */
+.wl-editor {
+    border-radius: 8px !important;
+    background: var(--waline-info-bg) !important;
+    min-height: 120px !important;
+}
+
+.wl-editor:focus {
+    background: #fff !important;
+    box-shadow: 0 0 0 2px rgba(73, 177, 245, 0.2) !important;
+}
+
+/* 按钮美化 */
+.wl-btn {
+    border-radius: 20px !important;
+    padding: 6px 20px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+}
+
+.wl-btn.primary {
+    background: var(--waline-theme-color) !important;
+    border-color: var(--waline-theme-color) !important;
+}
+
+.wl-btn.primary:hover {
+    background: var(--waline-active-color) !important;
+    border-color: var(--waline-active-color) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 114, 66, 0.3);
+}
+
+/* 评论列表项美化 */
+.wl-item {
+    padding: 15px;
+    border-bottom: 1px dashed #eee;
+    transition: background 0.3s;
+}
+
+.wl-item:hover {
+    background: rgba(73, 177, 245, 0.03);
+}
+
+/* 头像圆角 */
+.wl-avatar img {
+    border-radius: 50% !important;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 隐藏底部的 Waline 版权链接（可选，建议保留以示尊重） */
+/* .wl-power { display: none; } */
+
+
+
+
+

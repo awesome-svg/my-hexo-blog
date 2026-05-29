@@ -1,0 +1,26 @@
+<!-- Waline 评论系统 -->
+<% if (theme.waline.enable) { %>
+<div id="waline"></div>
+<script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+  init({
+    el: '#waline',
+    serverURL: '<%- theme.waline.serverURL %>', // 从主题配置读取
+    lang: 'zh-CN',
+    locale: {
+      placeholder: '填写邮箱可以收到回复提醒哦！🍎🍎🍎',
+    },
+    emoji: [
+      'https://unpkg.com/@waline/emojis@1.2.0/weibo',
+      'https://unpkg.com/@waline/emojis@1.2.0/alus',
+      'https://unpkg.com/@waline/emojis@1.2.0/bilibili',
+      'https://unpkg.com/@waline/emojis@1.2.0/qq',
+      'https://unpkg.com/@waline/emojis@1.2.0/tieba',
+      'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji',
+    ],
+    requiredMeta: ['nick', 'mail'], // 必填项：昵称和邮箱
+    dark: 'html[data-theme="dark"]', // 适配 Matery 的深色模式
+  });
+</script>
+<% } %>
