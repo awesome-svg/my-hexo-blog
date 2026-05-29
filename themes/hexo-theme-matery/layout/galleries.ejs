@@ -1,0 +1,467 @@
+<%
+    var allGalleries = site.data.gallery || [];
+    // 获取主题配置中的加密开关
+    var isEncryptEnabled = theme.PhotoVerifyPassword && theme.PhotoVerifyPassword.enable;
+    var promptMsg = theme.PhotoVerifyPassword && theme.PhotoVerifyPassword.promptMessage ? theme.PhotoVerifyPassword.promptMessage : "该相册已加密，请输入密码访问";
+    var errorMsg = theme.PhotoVerifyPassword && theme.PhotoVerifyPassword.errorMessage ? theme.PhotoVerifyPassword.errorMessage : "密码错误！";
+	var galleryTitle = theme.myGallery && theme.myGallery.title ? theme.myGallery.title : "我的相册";
+%>
+
+<!-- 引入 CryptoJS (用于密码验证) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<div id="gallery-app" class="custom-gallery-wrapper">
+    
+    <!-- ================= 标题区域 ================= -->
+    <div class="gallery-header">
+        <h2 class="gallery-title">
+            <i class="fas fa-camera-retro"></i> <%- galleryTitle %>
+        </h2>
+        <p class="gallery-subtitle">定格瞬间 · 珍藏记忆</p>
+        <div class="title-divider"></div>
+    </div>
+
+    <!-- ================= 模式 A: 相册列表 ================= -->
+    <div id="gallery-list-view" class="row gallery-grid">
+        <% if (allGalleries.length > 0) { %>
+            <% allGalleries.forEach(function(gallery, index) { %>
+                <div class="col s12 m6 l4 xl3 gallery-item-col" data-aos="fade-up" data-aos-delay="<%= index * 50 %>">
+                    <div class="gallery-card" onclick="handleGalleryClick('<%= gallery.name.replace(/'/g, "\\'") %>')">
+                        
+                        <!-- 图片容器 -->
+                        <div class="card-image-wrap">
+                            <img class="gallery-cover" 
+                                 src="<%- gallery.cover || '/medias/loading.gif' %>" 
+                                 loading="lazy"
+                                 decoding="async"
+                                 alt="<%= gallery.name %>">
+                            
+                            <!-- 遮罩层 -->
+                            <div class="card-overlay"></div>
+
+                            <!-- 加密锁图标：只有当全局开关开启且相册有密码时才显示 -->
+                            <% if (isEncryptEnabled && gallery.password) { %>
+                                <div class="lock-badge" title="此相册已加密">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            <% } %>
+
+                            <!-- 底部信息栏 -->
+                            <div class="card-info">
+                                <h3 class="gallery-name"><%= gallery.name %></h3>
+                                <p class="gallery-desc"><%= gallery.description || '暂无描述' %></p>
+                                <div class="gallery-meta">
+                                    <span><i class="fas fa-images"></i> <%= gallery.album ? gallery.album.length : 0 %> 张</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="col s12 center-align empty-state">
+                <i class="fas fa-folder-open fa-3x grey-text"></i>
+                <p class="grey-text">暂无相册内容</p>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- ================= 模式 B: 相册详情 ================= -->
+    <div id="gallery-detail-view" style="display: none;">
+        <div class="detail-header">
+            <button class="btn-back" onclick="showGalleryList()">
+                <i class="fas fa-arrow-left"></i> 返回
+            </button>
+            <h3 id="detail-title" class="detail-title"></h3>
+        </div>
+
+        <div class="row" id="detail-photos-container">
+            <!-- 动态插入照片 -->
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var GALLERIES_DATA = <%- JSON.stringify(allGalleries) %>;
+    var unlockedGalleries = {};
+    
+    // 将 EJS 变量传递给 JS
+    var CONFIG_ENCRYPT_ENABLE = <%- isEncryptEnabled %>;
+    var CONFIG_PROMPT_MSG = "<%- promptMsg %>";
+    var CONFIG_ERROR_MSG = "<%- errorMsg %>";
+
+    /**
+     * 生成照片 HTML
+     */
+    function createPhotoHTML(photo) {
+        var safeTitle = photo.title ? photo.title.replace(/"/g, '&quot;') : '';
+        var originalUrl = photo.img_url; 
+        
+        return [
+            '<div class="col s12 m6 l4 xl3 photo-item">',
+            '  <div class="photo-card">',
+            '    <a href="' + originalUrl + '" target="_blank" rel="noopener noreferrer">',
+            '      <img class="responsive-img" src="' + (photo.thumb_url || originalUrl) + '" loading="lazy" decoding="async" alt="' + safeTitle + '">',
+            '      <div class="photo-overlay">',
+            '        <i class="fas fa-external-link-alt"></i>',
+            '      </div>',
+            '    </a>',
+            '  </div>',
+            '</div>'
+        ].join('');
+    }
+
+    function handleGalleryClick(galleryName) {
+        var target = GALLERIES_DATA.find(function(g) { return g.name === galleryName; });
+        if (!target) return;
+
+        // 核心逻辑：只有当【全局开关开启】且【相册设置了密码】且【未解锁】时，才验证密码
+        if (CONFIG_ENCRYPT_ENABLE && target.password && !unlockedGalleries[galleryName]) {
+            verifyAndUnlock(target, function(success) {
+                if (success) {
+                    unlockedGalleries[galleryName] = true;
+                    showGalleryDetail(galleryName);
+                } else {
+                    // 密码错误处理
+                    alert(CONFIG_ERROR_MSG);
+                    // 如果配置了错误后返回主页，则执行跳转
+                    // 注意：通常建议仅提示错误，因为跳转体验较差。如需跳转，取消下面注释：
+                    // location.href = '/'; 
+                }
+            });
+        } else {
+            // 无需验证，直接显示
+            showGalleryDetail(galleryName);
+        }
+    }
+
+    function verifyAndUnlock(gallery, callback) {
+        var input = prompt(CONFIG_PROMPT_MSG);
+        if (input === null) {
+            callback(false);
+            return;
+        }
+        // 使用 SHA256 比对哈希值，确保密码不以明文形式存储在 JSON 中（可选，但推荐）
+        // 如果你希望 JSON 中存明文密码，可以将下面两行改为: var isMatch = (input === gallery.password);
+        var inputHash = CryptoJS.SHA256(input).toString(CryptoJS.enc.Hex);
+        var storedHash = CryptoJS.SHA256(gallery.password).toString(CryptoJS.enc.Hex);
+        
+        callback(inputHash === storedHash);
+    }
+
+    function showGalleryDetail(galleryName) {
+        var target = GALLERIES_DATA.find(function(g) { return g.name === galleryName; });
+        if (!target) return;
+
+        document.getElementById('gallery-list-view').style.display = 'none';
+        document.getElementById('gallery-detail-view').style.display = 'block';
+        document.getElementById('detail-title').innerText = target.name;
+        
+        var container = document.getElementById('detail-photos-container');
+        container.innerHTML = ''; 
+
+        if (target.album && target.album.length > 0) {
+            target.album.forEach(function(photo) {
+                container.insertAdjacentHTML('beforeend', createPhotoHTML(photo));
+            });
+        } else {
+            container.innerHTML = '<div class="col s12 center-align grey-text">该相册暂无照片</div>';
+        }
+        
+        window.scrollTo({ top: document.getElementById('gallery-app').offsetTop - 100, behavior: 'smooth' });
+    }
+
+    function showGalleryList() {
+        document.getElementById('gallery-detail-view').style.display = 'none';
+        document.getElementById('gallery-list-view').style.display = 'flex';
+        document.getElementById('detail-photos-container').innerHTML = '';
+    }
+</script>
+
+<style>
+    /* ================= 全局变量与基础样式 ================= */
+    :root {
+        --gallery-primary: #4285f4;
+        --gallery-accent: #ffeb3b;
+        --gallery-bg-card: rgba(255, 255, 255, 0.9);
+        --gallery-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        --gallery-shadow-hover: 0 15px 30px rgba(0,0,0,0.15);
+        --gallery-radius: 12px;
+        --gallery-transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .custom-gallery-wrapper {
+        padding: 20px 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* ================= 标题区域美化 ================= */
+    .gallery-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-top: 20px;
+    }
+
+    .gallery-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+
+    .gallery-title i {
+        color: var(--gallery-primary);
+        margin-right: 10px;
+    }
+
+    .gallery-subtitle {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 15px;
+        font-weight: 300;
+    }
+
+    .title-divider {
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(to right, var(--gallery-primary), #8ab4f8);
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+
+    /* ================= 相册卡片美化 ================= */
+    .gallery-grid {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+    }
+
+    .gallery-item-col {
+        padding: 10px;
+        display: flex;
+    }
+
+    .gallery-card {
+        width: 100%;
+        background: var(--gallery-bg-card);
+        border-radius: var(--gallery-radius);
+        box-shadow: var(--gallery-shadow);
+        overflow: hidden;
+        cursor: pointer;
+        transition: var(--gallery-transition);
+        position: relative;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .gallery-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--gallery-shadow-hover);
+    }
+
+    .card-image-wrap {
+        position: relative;
+        width: 100%;
+        padding-top: 75%; /* 4:3 比例 */
+        overflow: hidden;
+    }
+
+    .gallery-cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .gallery-card:hover .gallery-cover {
+        transform: scale(1.1);
+    }
+
+    .card-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+        opacity: 0.9;
+        transition: opacity 0.3s;
+    }
+
+    .card-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        color: #fff;
+        z-index: 2;
+        transform: translateY(0);
+        transition: transform 0.3s;
+    }
+
+    .gallery-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0 0 5px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .gallery-desc {
+        font-size: 0.85rem;
+        margin: 0 0 8px;
+        opacity: 0.9;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .gallery-meta {
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+
+    .gallery-meta i {
+        margin-right: 4px;
+        color: var(--gallery-accent);
+    }
+
+    .lock-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 32px;
+        height: 32px;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        border: 1px solid rgba(255,255,255,0.2);
+        transition: transform 0.3s;
+    }
+
+    .lock-badge i {
+        color: var(--gallery-accent);
+        font-size: 14px;
+    }
+
+    .gallery-card:hover .lock-badge {
+        transform: scale(1.1) rotate(10deg);
+    }
+
+    /* ================= 详情页美化 ================= */
+    .detail-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .btn-back {
+        background: transparent;
+        border: 1px solid #ddd;
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .btn-back:hover {
+        background: var(--gallery-primary);
+        color: #fff;
+        border-color: var(--gallery-primary);
+    }
+
+    .detail-title {
+        margin-left: 20px;
+        font-size: 1.5rem;
+        color: #333;
+        font-weight: 600;
+    }
+
+    /* 详情照片网格 */
+    .photo-item {
+        padding: 8px;
+    }
+
+    .photo-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        transition: transform 0.3s;
+        background: #fff;
+        position: relative;
+    }
+
+    .photo-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .photo-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s;
+    }
+
+    .photo-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .photo-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .photo-card:hover .photo-overlay {
+        opacity: 1;
+    }
+
+    .photo-overlay i {
+        color: #fff;
+        font-size: 2rem;
+        transform: scale(0.8);
+        transition: transform 0.3s;
+    }
+
+    .photo-card:hover .photo-overlay i {
+        transform: scale(1);
+    }
+
+    .empty-state {
+        padding: 60px 0;
+        color: #999;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .gallery-title { font-size: 1.8rem; }
+        .card-info { padding: 15px; }
+        .gallery-name { font-size: 1rem; }
+        .detail-header { flex-direction: column; align-items: flex-start; }
+        .detail-title { margin-left: 0; margin-top: 10px; }
+    }
+</style>

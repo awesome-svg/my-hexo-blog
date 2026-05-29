@@ -1,0 +1,58 @@
+
+[
+	{
+	    "name": "旅行记录",
+	    "cover": "/gallery/trival/1.jpg",
+	    "description": "",
+	    "url_name": "",
+	    "album": [
+			{
+		    	"img_url": "/gallery/trival/1.jpg",
+		    	"title": "",
+		    	"describe": ""
+	    	},
+	   		{
+		    	"img_url": "/gallery/trival/2.jpg",
+		    	"title": "",
+		    	"describe": ""
+	    	}
+	    ]	
+	},
+	{
+		"name": "美食记录",
+	    "cover": "/gallery/cuisine/10.jpg",
+	    "description": "",
+	    "url_name": "",
+	    "album": [
+			{
+		    	"img_url": "/gallery/cuisine/10.jpg",
+		    	"title": "",
+		    	"describe": ""
+	    	},
+	   		{
+		    	"img_url": "/gallery/cuisine/11.jpg",
+		    	"title": "",
+		    	"describe": ""
+	    	}
+	    ]
+	},
+	{
+		"name": "人物特写",
+	    "cover": "/gallery/People/mypic.jpg",
+	    "description": "",
+		"password": "123456",
+	    "url_name": "",
+	    "album": [
+			{
+		    	"img_url": "/gallery/People/6.jpg",
+		    	"title": "",
+		    	"describe": ""
+	    	},
+	   		{
+		    	"img_url": "/gallery/People/mypic.jpg",
+		    	"title": "",
+		    	"describe": ""
+	    	}	
+		]
+	}
+]
