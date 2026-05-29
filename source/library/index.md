@@ -1,6 +1,0 @@
----
-title: library
-date: 2026-05-23 22:29:24
-type: "library"
-layout: "library"
----

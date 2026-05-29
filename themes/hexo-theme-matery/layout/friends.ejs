@@ -190,11 +190,41 @@
 
 <main class="content">
     <div class="container friends-container">
-        <div class="card">
+        <div class="card" >
             <div class="card-content">
+			
                 <div class="tag-title center-align">
                     <i class="fas fa-address-book"></i>&nbsp;&nbsp;<%= __('friends') %>
                 </div>
+				
+				<div class="col s12" style="margin-bottom: 20px; z-index: 10; position: relative;">
+					<div class="card hoverable" style="border-left: 5px solid #4285f4;">
+						<div class="card-content">
+							<span class="card-title" style="font-size: 1.25rem; font-weight: bold; color: #333;">
+								<i class="fas fa-handshake" style="color: #4285f4;"></i> 欢迎交换友链
+							</span>
+							<p style="color: #666; margin-top: 10px;">
+								如需交换请在评论区留下你的博客信息，我会尽快添加~
+							</p>
+							
+							<blockquote style="background: #f9f9f9; border-left: 4px solid #ddd; padding: 10px 15px; margin: 15px 0;">
+								<p style="margin: 0; font-weight: bold;">🤝 友链交换原则：</p>
+								<ol style="margin: 10px 0 0 20px; color: #555;">
+									<li>博客稳定更新，无不良内容。</li>
+									<li>请先添加本站友链，再留言告知。</li>
+									<li>本站信息：
+										<ul style="list-style: disc; margin-left: 20px; margin-top: 5px;">
+											<li>名称：<strong>Awesone的博客</strong></li>
+											<li>地址：<a href="https://personyzh.cn/" target="_blank">https://personyzh.cn/</a></li> 
+											<li>头像：<code  style="font-size: 0.95rem;">https://personyzh.cn/medias/avatar.png</code></li>
+										</ul>
+									</li>
+								</ol>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+        <!-- ==================== 提示语结束 ==================== -->
                 <article id="friends-link">
                     <% if (site.data && site.data.friends) { %>
                     <% var friends = site.data.friends; %>
@@ -222,8 +252,37 @@
                         </div>
                         <% } %>
                     </div>
-                    <% } %>
+                    <% } else { %>
+						<div class="col s12 center-align">
+							<p>暂无友链数据，请在 source/_data/friends.json 中配置。</p>
+						</div>
+					<% } %>
                 </article>
+				
+				        <!-- ==================== 动态统计与底部文字 Start ==================== -->
+				<% 
+					var totalFriends = site.data.friends.length;
+				%>
+
+				<div class="col s12 center-align" style="margin-top: 40px; margin-bottom: 30px;">
+					<div class="divider"></div>
+					
+					<div class="links-footer-stats" style="padding: 15px 0;">
+						<p class="grey-text text-darken-2" style="font-size: 1rem; margin-bottom: 10px;">
+							<i class="fas fa-users" style="color: #4285f4;"></i> 
+							当前共有 <strong class="blue-text"><%= totalFriends %></strong> 位好友
+						</p>
+						
+						<p class="grey-text text-lighten-1" style="font-size: 1rem;">
+							<i class="fas fa-heart" style="color: #ff4081;"></i> 
+							感谢所有友情链接的支持，愿我们共同进步！
+							<br>
+							<span>(更多优质博客正在收录中...)</span>
+						</p>
+					</div>
+				</div>
+				
+				<!-- ==================== 动态统计与底部文字 End ==================== -->	
             </div>
         </div>
 
