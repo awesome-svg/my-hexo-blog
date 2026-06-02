@@ -1,27 +1,46 @@
-<!-- Waline 评论系统 -->
-<% if (theme.waline.enable) { %>
-<div id="waline"></div>
-<script type="module">
-  import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-  
+<% if (theme.waline && theme.waline.enable) { %>
+  <!-- 1. 容器 -->
+  <div id="waline" style="margin-top: 20px;"></div>
 
-  init({
-    el: '#waline',
-    serverURL: '<%- theme.waline.serverURL %>', // 从主题配置读取
-    lang: 'zh-CN',
-    locale: {
-      placeholder: '填写邮箱可以收到回复提醒哦！🍎🍎🍎',
-    },
-    emoji: [
-      'https://unpkg.com/@waline/emojis@1.2.0/weibo',
-      'https://unpkg.com/@waline/emojis@1.2.0/alus',
-      'https://unpkg.com/@waline/emojis@1.2.0/bilibili',
-      'https://unpkg.com/@waline/emojis@1.2.0/qq',
-      'https://unpkg.com/@waline/emojis@1.2.0/tieba',
-      'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji',
-    ],
-    requiredMeta: ['nick', 'mail'], // 必填项：昵称和邮箱
-    dark: 'html[data-theme="dark"]', // 适配 Matery 的深色模式
-  });
-</script>
+  <!-- 2. 引入 Waline JS库 (必须在前) -->
+  <script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+  <!-- 3. 初始化脚本 (必须在后) -->
+  <script>
+    // 等待 DOM 和 Waline 库都加载完毕
+    window.addEventListener('load', function() {
+      // 双重检查：确保库已加载且容器存在
+      if (typeof Waline === 'undefined') {
+        console.error('❌ Waline 库加载失败，请检查网络或 CDN');
+        return;
+      }
+      
+      const container = document.getElementById('waline');
+      if (!container) {
+        console.error('❌ 未找到 #waline 容器');
+        return;
+      }
+
+      try {
+        // 初始化
+        Waline.init({
+          el: '#waline',
+          // 【关键】替换为你自己的服务端地址，不要留空！
+          serverURL: '<%= theme.waline.serverURL %>', 
+          path: window.location.pathname,
+          lang: 'zh-CN',
+          emoji: [
+            '//unpkg.com/@waline/emojis@1.1.0/weibo',
+            '//unpkg.com/@waline/emojis@1.1.0/bilibili'
+          ],
+          requiredMeta: ['nick', 'mail'],
+          // 开启调试模式，方便看报错
+          debug: true 
+        });
+        console.log('✅ Waline 初始化成功');
+      } catch (e) {
+        console.error('❌ Waline 初始化出错:', e);
+      }
+    });
+  </script>
 <% } %>
