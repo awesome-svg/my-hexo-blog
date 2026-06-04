@@ -197,3 +197,31 @@ code[class*="language-"], pre[class*="language-"] {
 }
 
 
+/* 强制修改文字和图标颜色为白色 */
+#gaode-weather {
+  color: #333333 !important; /* 纯白色，深色导航栏清晰可见 */
+}
+#gaode-weather i {
+  color: #333333 !important;
+  font-size: 18px; /* 可以调整图标大小，14-18px都可以 */
+}
+#weather-info {
+  font-size: 17px; /* 调整文字大小，13-15px适配导航栏 */
+}
+
+/* 如果你的导航栏是浅色/白色背景，就用下面这个颜色替换上面： */
+/* #gaode-weather, #gaode-weather i {
+  color: #333333 !important;
+} */
+
+/* 移动端隐藏 */
+@media screen and (max-width: 768px) {
+  .gaode-weather-container {
+    display: none !important;
+  }
+}
+
+
+
+
+

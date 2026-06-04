@@ -89,7 +89,89 @@
             <% } %>
         </div>
         <div class="col s12 m4 l4 social-link <%- socialClass %>"><%- partial('_partial/social-link') %></div>
+		
     </div>
+	
 </footer>
 
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const KEY = 'fc8dd2dde0ed041e90a98ef669e0e9ef'; //替换为你的 Key
+		
+		const infoEl = document.getElementById('weather-info');
+		const iconEl = document.getElementById('weather-icon');
+		const topinfoEl = document.getElementById('top-weather-info');
+		const topiconEl = document.getElementById('top-weather-icon');
+
+		// 图标映射函数
+		const getIconClass = (weather) => {
+			if (!weather) return 'fa-cloud';
+			if (weather.includes('晴')) return 'fa-sun-o';
+			if (weather.includes('雨')) return 'fa-tint';
+			if (weather.includes('雪')) return 'fa-snowflake-o';
+			if (weather.includes('云') || weather.includes('阴')) return 'fa-cloud';
+			return 'fa-cloud';
+		};
+		
+		// 核心函数：更新 UI
+		function updateUI( weather,temp) {
+			const iconClass = `fa ${getIconClass(weather)}`;
+			const textContent = `${temp}°C ${weather}`;
+
+			// 1. 更新顶栏
+			if (topinfoEl) topinfoEl.innerText = textContent;
+			if (topiconEl) topiconEl.className = iconClass;
+
+			// 2. 更新侧边栏
+			if (infoEl) infoEl.innerText = textContent;
+			if (iconEl) iconEl.className = iconClass; 
+		}
+
+		// 核心函数：根据 Adcode 获取天气
+		function fetchWeather(adcode) {
+			if (!adcode) {
+				updateUI('--', '定位失败');
+				return;
+			}
+			
+			fetch(`https://restapi.amap.com/v3/weather/weatherInfo?key=${KEY}&city=${adcode}&extensions=base`)
+			.then(res => res.json())
+			.then(data => {
+				if (data.status === '1' && data.lives && data.lives.length > 0) {
+					const arry = data.lives; 
+					const live = arry.at(0);
+					updateUI( live.weather,live.temperature);
+				} else {
+					updateUI('--', '获取失败');
+				}
+			})
+			.catch(err => {
+				console.error(err);
+				updateUI('--', '网络错误');
+			});
+		}
+		// 自动定位：通过 IP 获取当前城市 Adcode
+		function autoLocateAndShow() {
+			// 使用高德 IP 定位接口
+			fetch(`https://restapi.amap.com/v3/ip?key=${KEY}`)
+			.then(res => res.json())
+			.then(data => {
+				if (data.status === '1' && data.adcode.length>0) {
+					// 成功获取到城市 Adcode，立即查询天气
+					fetchWeather(data.adcode);
+				} else {
+					// 如果 IP 定位失败（如本地 localhost），默认显示成都
+					console.warn('IP 定位失败，使用默认城市');
+					fetchWeather('510100'); // 默认'510100' 成都
+				}
+			})
+			.catch(() => {
+				// 网络错误时的兜底
+				fetchWeather('510100'); 
+			});
+		}
+		// 页面加载后自动执行
+		autoLocateAndShow();
+	});
+</script>
 <div class="progress-bar"></div>

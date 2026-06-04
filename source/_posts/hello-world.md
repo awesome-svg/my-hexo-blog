@@ -7,7 +7,7 @@ comments: true
 toc: true
 copyright: true
 date: 2026-06-04 15:42:59
-img: '/medias/featureimages/myArticle.jpg'
+img:
 coverImg:
 password:
 summary:

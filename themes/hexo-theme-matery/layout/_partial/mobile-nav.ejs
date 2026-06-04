@@ -3,11 +3,21 @@ var configRoot = config.root
 configRoot = (configRoot === null || configRoot === undefined || configRoot === '/') ? '' : configRoot;
 %>
 <div id="mobile-nav" class="side-nav sidenav">
-
     <div class="mobile-head bg-color">
-        <% if (theme.logo !== undefined && theme.logo.length > 0) { %>
-        <img src="<%- theme.jsDelivr.url %><%- url_for(theme.logo) %>" class="logo-img circle responsive-img">
-        <% } %>
+		<div class="brand-logo-weath" style="display: flex; gap: 10px; height: 135px; ">
+			<% if (theme.logo !== undefined && theme.logo.length > 0) { %>
+			<img src="<%- theme.jsDelivr.url %><%- url_for(theme.logo) %>" class="logo-img circle responsive-img">
+			<% } %>
+		
+			<!-- 高德自动定位天气组件 -->
+			<div class="navbar-item auto-weather-container"  style="height: 75px;margin-left:22px;margin-top:33px;">
+				<div id="gaode-weather" style="display: flex;width:100px; align-items: center; gap: 6px; color: #fff; font-size: 14px; cursor: default;">
+					<i id="weather-icon" class="fa fa-spinner fa-spin"></i>
+					<span id="weather-info">定位中...</span>
+				</div>
+			</div>
+		</div>
+		
         <div class="logo-name"><%= config.title %></div>
         <div class="logo-desc">
             <% if (config.description && config.description.length > 0) { %>
@@ -74,6 +84,7 @@ configRoot = (configRoot === null || configRoot === undefined || configRoot === 
           <% } %>
         </li>
         <% }); %>
+				
         <% if (theme.githubLink && theme.githubLink.enable) { %>
         <li><div class="divider"></div></li>
         <li>
