@@ -158,8 +158,8 @@ socialLink:
 # 可以在某篇文章的 Front-matter 中再加上`toc: false`，使该篇文章关闭TOC目录功能
 toc:
   enable: true
-  heading: h2, h3, h4
-  collapseDepth: 0 # 目录默认展开层级
+  heading: h2, h3, h4,h5,h6
+  collapseDepth: 6 # 目录默认展开层级
   showToggleBtn: true # 是否显示切换TOC目录展开收缩的按钮
 
 # 代码块相关
@@ -303,16 +303,17 @@ postCalendar: true
 # the Gitalk config，default disabled
 # Gitalk 评论模块的配置，默认为不激活
 gitalk:
-  enable: false
+  enable: true
   owner: awesome-svg
   id: 
   labels: 'gitalk'
-  repo: blogtalk
+  repo: Myblog_gitalk
   oauth:
     clientId: Ov23lifLBUDdVWmS5FJ2
-    clientSecret: d175637b9f7cb173cab93b87d15db9c83712fc80
-  admin: [awesome-svg]
-  proxy: 
+  admin: ['awesome-svg']
+  proxy: 'https://gitalkproxy.personyzh.cn/api/proxy'
+  distractionFreeMode: false    # 类似 Facebook 的无干扰模式
+  language: 'zh-CN'             # 语言设置，支持 'en', 'zh-CN', 'zh-TW' 等
 
 
 
@@ -343,7 +344,7 @@ livere:
 # Waline 评论系统配置
 # ----------------------
 waline:
-  enable: true                  # 开启评论
+  enable: false                  # 开启评论
   serverURL:  'https://waline.personyzh.cn' # ⚠️ 务必替换为你的后端地址
   lang: zh-CN                   # 语言：zh-CN, en, jp, etc.
   

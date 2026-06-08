@@ -100,6 +100,8 @@
 		
 		const infoEl = document.getElementById('weather-info');
 		const iconEl = document.getElementById('weather-icon');
+		const sideCityEl = document.getElementById('side-weather-city'); // 新增
+		
 		const topinfoEl = document.getElementById('top-weather-info');
 		const topiconEl = document.getElementById('top-weather-icon');
 
@@ -114,23 +116,25 @@
 		};
 		
 		// 核心函数：更新 UI
-		function updateUI( weather,temp) {
+		function updateUI(city, weather,temp) {
 			const iconClass = `fa ${getIconClass(weather)}`;
-			const textContent = `${temp}°C ${weather}`;
+			const textContent = `${city.slice(0, 2)} · ${temp}°C`;
 
 			// 1. 更新顶栏
 			if (topinfoEl) topinfoEl.innerText = textContent;
 			if (topiconEl) topiconEl.className = iconClass;
 
 			// 2. 更新侧边栏
-			if (infoEl) infoEl.innerText = textContent;
+			if (infoEl) infoEl.innerText = ` ${temp}°C`;
 			if (iconEl) iconEl.className = iconClass; 
+			if (sideCityEl) sideCityEl.innerText = city; // 显示城市
+			
 		}
 
 		// 核心函数：根据 Adcode 获取天气
 		function fetchWeather(adcode) {
 			if (!adcode) {
-				updateUI('--', '定位失败');
+				updateUI('未知','--', '定位失败');
 				return;
 			}
 			
@@ -140,14 +144,15 @@
 				if (data.status === '1' && data.lives && data.lives.length > 0) {
 					const arry = data.lives; 
 					const live = arry.at(0);
-					updateUI( live.weather,live.temperature);
+					console.log(live);
+					updateUI(live.city, live.weather,live.temperature);
 				} else {
-					updateUI('--', '获取失败');
+					updateUI('未知','--', '获取失败');
 				}
 			})
 			.catch(err => {
 				console.error(err);
-				updateUI('--', '网络错误');
+				updateUI('未知','--', '网络错误');
 			});
 		}
 		// 自动定位：通过 IP 获取当前城市 Adcode

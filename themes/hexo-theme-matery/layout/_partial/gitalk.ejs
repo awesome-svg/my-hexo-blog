@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<link rel="stylesheet" href="<%- theme.jsDelivr.url %><%- url_for('/css/my-gitalk.css') %>">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
@@ -9,16 +8,18 @@
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.gitalk) %>"></script>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '<%- theme.gitalk.oauth.clientId %>',
-        clientSecret: '<%- theme.gitalk.oauth.clientSecret %>',
         repo: '<%- theme.gitalk.repo %>',
         owner: '<%- theme.gitalk.owner %>',
         admin: <%- JSON.stringify(theme.gitalk.admin) %>,
         id: '<%- date(page.date, 'YYYY-MM-DDTHH-mm-ss') %>',
-        distractionFreeMode: false  // Facebook-like distraction free mode
+        distractionFreeMode: false,  // Facebook-like distraction free mode
+        <% if (theme.gitalk.proxy) { %>
+        proxy: '<%- theme.gitalk.proxy %>'
+        <% } %>
     });
 
     gitalk.render('gitalk-container');

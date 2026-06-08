@@ -10,10 +10,15 @@ configRoot = (configRoot === null || configRoot === undefined || configRoot === 
 			<% } %>
 		
 			<!-- 高德自动定位天气组件 -->
-			<div class="navbar-item auto-weather-container"  style="height: 75px;margin-left:22px;margin-top:33px;">
-				<div id="gaode-weather" style="display: flex;width:100px; align-items: center; gap: 6px; color: #fff; font-size: 14px; cursor: default;">
-					<i id="weather-icon" class="fa fa-spinner fa-spin"></i>
-					<span id="weather-info">定位中...</span>
+			<div class="navbar-item auto-weather-container"  style="height: 75px;margin-left:40px;margin-top:50px;">
+				<div id="gaode-weather" style="width:110px; align-items: center;line-height:0.7; color: #fff; font-size: 14px; cursor: default;">
+					<span id="side-weather-city" style=" display: block;margin-left:10px;font-weight: bold; font-size: 15px;"></span>
+					
+					<div style="display: flex;align-items: center;gap:10px;height:40px;">
+						<i id="weather-icon" class="fa fa-spinner fa-spin"></i>
+						<span id="weather-info">定位中...</span>
+					</div>
+					
 				</div>
 			</div>
 		</div>

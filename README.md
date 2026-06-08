@@ -66,8 +66,6 @@
     </nav>
 	
 	
-	
-	
 	--------------------------------------
 可增加功能：
 	 加入图片懒加载功能，在根目录配置文件开启和关闭
@@ -90,55 +88,7 @@
 
    
 	
-----------------------------------------------------------------
-天气
-<!-- 《添加“心知天气”-->
-<div id="tp-weather-widget"></div>
-<script>
-        (function(T, h, i, n, k, P, a, g, e) {
-            g = function() {
-                P = h.createElement(i);
-                a = h.getElementsByTagName(i)[0];
-                P.src = k;
-                P.charset = "utf-8";
-                P.async = 1;
-                a.parentNode.insertBefore(P, a)
-            };
-            T["ThinkPageWeatherWidgetObject"] = n;
-            T[n] || (T[n] = function() {
-                (T[n].q = T[n].q || []).push(arguments)
-            });
-            T[n].l = +new Date();
-            if (T.attachEvent) {
-                T.attachEvent("onload", g)
-            } else {
-                T.addEventListener("load", g, false)
-            }
-        }(window, document, "script", "tpwidget", "//widget.thinkpage.cn/widget/chameleon.js"))
-    </script>
-    <script>
-        tpwidget("init", {
-            "flavor": "slim",
-            "location": "WM6N2PM3WY2K",
-            "geolocation": "enabled",
-            "language": "zh-chs",
-            "unit": "c",
-            "theme": "chameleon",
-            "container": "tp-weather-widget",
-            "bubble": "enabled",
-            "alarmType": "badge",
-            "color": "#FFFFFF",
-            "uid": "U88B4B2797",
-            "hash": "c9d7cb43b80ffece52c9a1ebbfbca65f"
-        });
-        tpwidget("show");
-    </script>
-<!-- 添加“心知天气”》-->
- 
- ==》
- 粘贴到 themes/matery/layout/layout.ejs即可。
-
-
+---------------------------------------------------------------
 
 //gittalk代理设置
 
@@ -309,10 +259,6 @@ addEventListener("fetch", async event => {
         }
     })());
 });
-
-
-
-
 
 
 volantis主题

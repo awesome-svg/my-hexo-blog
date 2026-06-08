@@ -222,6 +222,11 @@ code[class*="language-"], pre[class*="language-"] {
 }
 
 
+.card .card-image .card-title {
+    font-size:18px;
+}
+
+
 
 
 
