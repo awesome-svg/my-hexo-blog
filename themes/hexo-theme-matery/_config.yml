@@ -296,7 +296,7 @@ postCalendar: true
 
 # Gitalk 评论模块的配置
 gitalk:
-  enable: true
+  enable: false
   owner: 'awesome-svg'
   labels: 'gitalk'
   repo: 'Myblog_gitalk'
@@ -310,17 +310,16 @@ gitalk:
 
 # Gitment 评论模块的配置，默认为不激活
 gitment:
-  enable: false
-  owner:
-  repo:
+  enable: true
+  owner: 'awesome-svg'
+  repo: 'Myblog_gitalk'
   oauth:
-    clientId:
+    clientId: 'Ov23lifLBUDdVWmS5FJ2'
     clientSecret:
-
-# Disqus评论模块的配置，默认为不激活
-disqus:
-  enable: false
-  shortname:
+  perPage: 10 # 每页评论数
+  pagerDirection: last # 评论排序方向，'last' 为最新在前 
+  proxy: 'https://gitalkproxy.personyzh.cn/api/proxy'  
+  language: 'zh-CN'             # 语言设置，支持 'en', 'zh-CN', 'zh-TW' 等
 
 # Livere 来必力评论模块的配置，默认为不激活
 livere:
@@ -356,6 +355,11 @@ waline:
   turnstileKey: ""              # Cloudflare Turnstile 密钥 (防机器人，可选)
   recaptchaV3Key: ""            # Google reCAPTCHA v3 密钥 (防机器人，可选)
 
+#----------------------------------------------------------------------------------------------
+# Disqus评论模块的配置，默认为不激活
+disqus:
+  enable: false
+  shortname:
   
 # Valine 评论模块的配置，默认为不激活，如要使用，就请激活该配置项，并设置 appId 和 appKey.
 valine:
@@ -371,7 +375,7 @@ valine:
   background: /medias/comment_bg.png
   
   
-# MiniValine 评论模块的配置，默认为不激活，如要使用，就请激活该配置项，并设置 appId 和 appKey.
+# MiniValine 评论模块的配置，默认为不激活
 # See: https://github.com/MiniValine/MiniValine
 minivaline:
   enable: false

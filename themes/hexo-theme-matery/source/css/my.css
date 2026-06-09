@@ -226,7 +226,32 @@ code[class*="language-"], pre[class*="language-"] {
     font-size:18px;
 }
 
+/* 1. 强制根容器为Flex布局并提升优先级 */
+.gitment-root-container {
+	font-family: 'myFont', sans-serif;
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+}
 
+/* 2. 让所有子容器占满宽度 */
+.gitment-root-container > .gitment-container {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
 
-
+/* 3. 核心：通过order重新排序 */
+.gitment-header-container {
+    order: 1 !important;
+	margin-bottom: 10px;
+}
+.gitment-editor-container {
+    order: 2 !important;
+}
+.gitment-comments-container {
+    order: 3 !important;
+}
+.gitment-footer-container {
+    order: 4 !important;
+}
 
