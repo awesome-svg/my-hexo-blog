@@ -11,6 +11,7 @@
 
 <script src="<%- theme.jsDelivr.url %><%- url_for('/libs/gitment/gitment.js') %>"></script>
 
+
 <script>
 var gitment = new Gitment({
     id: '<%- date(page.date, 'YYYY-MM-DDTHH-mm-ss') %>',
@@ -20,7 +21,7 @@ var gitment = new Gitment({
         client_id: '<%= theme.gitment.oauth.clientId %>',
         client_secret: '<%= theme.gitment.oauth.clientSecret %>',
     },
-	_server: 'https://gitalkproxy.personyzh.cn/api/proxy',
+	proxy: '<%- theme.gitalk.proxy %>',
 	lang: 'zh-CN'
 
 });
