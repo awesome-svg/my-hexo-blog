@@ -310,7 +310,7 @@ gitalk:
 
 # Gitment 评论模块的配置，默认为不激活
 gitment:
-  enable: true
+  enable: false
   owner: 'awesome-svg'
   repo: 'Myblog_gitalk'
   oauth:
@@ -323,9 +323,10 @@ gitment:
 
 # Livere 来必力评论模块的配置，默认为不激活
 livere:
-  enable: false
-  uid:
-  
+  enable: true
+  clientId: CMyXqI8WIAIVq6QaRGUA #自定义域名用
+  #clientId: PFeohQmNeUyB5io7m1Fs #域名https://localhost:4000用
+
 
 # Waline 评论系统配置
 waline:
