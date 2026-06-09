@@ -282,7 +282,7 @@ gitment:
   pagerDirection: last # 评论排序方向，'last' 为最新在前
 
 ```
-1. 修改gitment样式
+2. 修改gitment样式
  Gitment 评论显示在评论框（输入区域）上方是由其‌默认的代码渲染逻辑‌和‌DOM 结构顺序‌决定的，这被视为该插件的一个设计缺陷或固有特性。
  
 - 修改gitment.ejs文件
@@ -343,7 +343,7 @@ window.addEventListener('load', function() {
     order: 4 !important;
 }
 ```
-1. gitment无法登录的解决方案
+3. gitment无法登录的解决方案
   Gitment无法登录主要是因为其依赖的认证服务器无法正常访问。Gitment‌ 评论系统使用 https://gh-oauth.imsun.net是官方提供的 ‌GitHub OAuth 代理服务器。
     
 - 当前状况与替代方案
@@ -391,7 +391,6 @@ livere:
 
 ```
 
-
 ##### (四)  引入评论模块到文章页
 打开文章详情模板文件themes/hexo-theme-matery/layout/_partial/post-detail.ejs（部分旧版本路径为post.ejs），在你需要显示评论框的位置添加以下引用代码：
 
@@ -409,17 +408,9 @@ livere:
  
 1. 本地测试时界面显示错乱，需要在Livere官网申请安装本地测试的网站.
 2. 在实际的生产过程中使用对应域名配置的clientId即可
-
-
-
-
-
-
-
-
-
+----
 
 
 ### 结语
-----
+
  如在配置评论系统的过程中,有任何问题可留言,我协助大家一起解决!

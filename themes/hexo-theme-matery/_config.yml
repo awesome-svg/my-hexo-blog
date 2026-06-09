@@ -287,13 +287,9 @@ PhotoVerifyPassword:
 # 设置在归档页面中是否显示'文章日历'控件
 postCalendar: true
 
-# 不建议使用gittalk,gitment这样权限过高的oauth app,因为它们能够 读写 授权者 所有的公共仓库 ，也就是说拿到你的授权 Token 的人，可以将你的 GitHub 公共仓库删空（这是github权限分的不够细的锅），如果恶意攻击者想获取使用者的 AccessToken，只需要在代码中加上一个 ajax 请求即可。原贴地址:https://www.v2ex.com/t/535608。建议大家看完。（我没有在用gittalk/gitment的网站上评论过，但根据v2ex网友的提示，如果网站自行修改了 gitalk.js 脚本 或者反代了 github api，就很容易拿到你的 Token ）
-# https://github.com/utterance/utterances 是个 GitHub App，它的权限仅限于某个仓库。像 hugo hexo 这种静态页面类型的博客，clientID/clientSecret 泄露是不可避免的。我认为较好的解决方式是像 utteras 这种 GitHubApp，只有一个仓库的读写权限，将破坏降到最小。
-# valine和minivaline都是使用的免费的leancloud开发版资源，即使数据丢了leancloud也不用负任何的责任。此外valine的src目录已在1.4.0后停止更新。。。薛定谔的开源。
-# 当初多说国内最大都倒了，livere不一定靠谱。
-# disqus被墙了。
-# 畅言需要备案。
-
+# ------------------------------
+# 以下是几种评论模块的设置
+#-----------------------------------
 # Gitalk 评论模块的配置
 gitalk:
   enable: false
@@ -323,14 +319,14 @@ gitment:
 
 # Livere 来必力评论模块的配置，默认为不激活
 livere:
-  enable: true
+  enable: false
   clientId: CMyXqI8WIAIVq6QaRGUA #自定义域名用
   #clientId: PFeohQmNeUyB5io7m1Fs #域名https://localhost:4000用
 
 
 # Waline 评论系统配置
 waline:
-  enable: false                  # 开启评论
+  enable: true                  # 开启评论
   serverURL:  'https://waline.personyzh.cn' # ⚠️ 务必替换为你的后端地址
   lang: zh-CN                   # 语言：zh-CN, en, jp, etc.
   
