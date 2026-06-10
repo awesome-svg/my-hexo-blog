@@ -141,7 +141,7 @@ githubEmojis:
 douban:
   id: 295283474  #这个需要修改为你个人的id
   user: AweSone 
-  builtin: true
+  builtin: false
   customize_layout: douban
   dynamic: false
   item_per_page: 6

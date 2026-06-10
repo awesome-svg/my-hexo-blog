@@ -36,6 +36,7 @@ tags:
   主要涉及 GitHub OAuth 应用创建、仓库准备、github代理服务的搭建、以及主题配置文件的修改。Matery 主题通常内置了对 Gitalk 的支持，因此无需手动编写复杂的模板代码，只需正确配置即可。以下是详细的操作步骤：
   
 ##### (一) 在 GitHub 上创建 OAuth App
+
  登录 GitHub，点击右上角头像，选择 ‌Settings‌。
 在左侧菜单栏底部找到 ‌Developer settings‌，点击进入。
 选择 ‌OAuth Apps‌，然后点击 ‌New OAuth App‌。
@@ -45,7 +46,9 @@ tags:
 ‌Authorization callback URL‌: 同样填写你的博客首页地址（例如 https://yourname.github.io）。
 点击 ‌Register application‌。
 注册成功后，你会看到 ‌Client ID‌ 和 ‌Client Secret‌。‌请妥善保管 Client Secret‌，后续配置需要用到。
+
 ##### (二) 创建用于存储评论的仓库
+
 在 GitHub 上创建一个新的公共仓库（Public Repository）。
 仓库名称可以任意，例如 blog-comments 或 gitalk-comments。
 ‌注意‌：记住这个仓库的名称和你的 GitHub 用户名，后续配置需要用到。
@@ -247,6 +250,42 @@ hexo d
 #### 二、Waline
 
   waline代理服务器的配置参考这篇文章:[Vercel配置waline服务](https://waline.js.org/guide/get-started)
+  如果需要使Waline更加完善,如违禁词、黑名单、自定义 Hook、自定义头像获取逻辑等,在Waline服务端index.js添加
+  ```
+  // index.js
+const Waline = require('@waline/vercel');
+
+module.exports = Waline({
+
+  // 2. 违禁词配置 (包含这些词的评论直接标记为垃圾评论)
+  forbiddenWords: ['广告', '博彩', '违法关键词'],
+
+  // 3. IP 黑名单 (直接拒绝访问)
+  disallowIPList: ['192.168.1.1'],
+
+  // 4. 自定义 Hook：发布评论前执行
+  // 可用于接入第三方垃圾检测 API (如 Akismet)
+  async presave(comment) {
+    // 示例：如果评论内容包含特定字符，直接拦截
+    if (comment.comment.includes('测试拦截')) {
+      return { errmsg: '评论包含敏感内容，发布失败' };
+    }
+    // 返回空或 undefined 表示允许发布
+  },
+
+  // 5. 自定义头像获取逻辑
+  // 示例：自动将 QQ 邮箱转换为 QQ 头像
+  avatarUrl(comment) {
+    if (comment.mail && comment.mail.endsWith('@qq.com')) {
+      const qqNumber = comment.mail.split('@');
+      return `https://q1.qlogo.cn/g?b=qq&nk=${qqNumber}&s=100`;
+    }
+    // 其他情况返回 null，使用默认 Gravatar
+    return null;
+  }
+});
+```
+  
   
 #### 三、Gitment
 ##### (一) 注册 GitHub OAuth Application

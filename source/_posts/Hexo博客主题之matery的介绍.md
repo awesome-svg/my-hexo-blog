@@ -17,7 +17,7 @@ tags:
 
 > 这是一个采用`Material Design`和响应式设计的 Hexo 博客主题。
 
-### 特性
+#### 特性
 
 - 简单漂亮，文章内容美观易读
 - [Material Design](https://material.io/) 设计
@@ -37,7 +37,16 @@ tags:
 - 集成了[不蒜子统计](http://busuanzi.ibruce.info/)、谷歌分析（`Google Analytics`）和文章字数统计等功能
 - 支持在首页的音乐播放和视频播放功能
 
-### 下载
+#### 贡献者
+
+感谢下面列出的贡献者，没有他们，hexo-theme-matery 不会这么完美。
+
+- [@HarborZeng](https://github.com/HarborZeng)
+- [@shw2018](https://github.com/shw2018)
+- [@L1cardo](https://github.com/L1cardo)
+- [@Five-great](https://github.com/Five-great)
+
+#### 下载
 
 当你看到这里的时候，应该已经有一个自己的 [Hexo](https://hexo.io/zh-cn/) 博客了。如果还没有的话，不妨使用 Hexo 和 [Markdown](https://www.appinn.com/markdown/) 来写博客和文章。
 
@@ -49,19 +58,19 @@ tags:
 git clone https://github.com/awesome-svg/hexo-theme-matery.git
 ```
 
-#### 配置
+##### 配置
 
-##### 1.切换主题
+###### 1.切换主题
 
 修改 Hexo 根目录下的 `_config.yml` 的  `theme` 的值：`theme: hexo-theme-matery`
 
-###### `_config.yml` 文件的其它修改建议:
+ `_config.yml` 文件的其它修改建议:
  
 - 请修改 `_config.yml` 的 `url` 的值为你的网站主 `URL`（如：`http://xxx.github.io`）。
 - 建议修改两个 `per_page` 的分页条数值为 `6` 的倍数，如：`12`、`18` 等，这样文章列表在各个屏幕下都能较好的显示。
 - 如果你是中文用户，则建议修改 `language` 的值为 `zh-CN`。
 
-##### 2.新建分类categories页
+###### 2.新建分类categories页
 
 `categories` 页是用来展示所有分类的页面，如果在你的博客 `source` 目录下还没有 `categories/index.md` 文件，那么你就需要新建一个，命令如下：
 
@@ -80,7 +89,7 @@ layout: "categories"
 ---
 ```
 
-##### 3.新建标签tags页
+###### 3.新建标签tags页
 
 `tags` 页是用来展示所有标签的页面，如果在你的博客 `source` 目录下还没有 `tags/index.md` 文件，那么你就需要新建一个，命令如下：
 
@@ -99,7 +108,7 @@ layout: "tags"
 ---
 ```
 
-##### 4.新建关于我about页
+###### 4.新建关于我about页
 
 `about` 页是用来展示**关于我和我的博客**信息的页面，如果在你的博客 `source` 目录下还没有 `about/index.md` 文件，那么你就需要新建一个，命令如下：
 
@@ -118,7 +127,7 @@ layout: "about"
 ---
 ```
 
-##### 5.新建友情连接friends页(可选的)
+###### 5.新建友情连接friends页(可选的)
 
 `friends` 页是用来展示**友情连接**信息的页面，如果在你的博客 `source` 目录下还没有 `friends/index.md` 文件，那么你就需要新建一个，命令如下：
 
@@ -161,7 +170,7 @@ layout: "friends"
 }]
 ```
 
-##### 6.代码高亮
+###### 6.代码高亮
 
 由于 Hexo 自带的代码高亮主题显示不好看，所以主题中使用到了 [hexo-prism-plugin](https://github.com/ele828/hexo-prism-plugin) 的 Hexo 插件来做代码高亮，安装命令如下：
 
@@ -182,7 +191,7 @@ prism_plugin:
   custom_css:
 ```
 
-##### 7.搜索
+###### 7.搜索
 
 本主题中还使用到了 [hexo-generator-search](https://github.com/wzpan/hexo-generator-search) 的 Hexo 插件来做内容搜索，安装命令如下：
 
@@ -198,7 +207,7 @@ search:
   field: post
 ```
 
-##### 8.中文链接转拼音(可选)
+###### 8.中文链接转拼音(可选)
 
 如果你的文章名称是中文的，那么 Hexo 默认生成的永久链接也会有中文，这样不利于 `SEO`，且 `gitment` 评论对中文链接也不支持。我们可以用 [hexo-permalink-pinyin](https://github.com/viko16/hexo-permalink-pinyin) Hexo 插件使在生成文章时生成中文拼音的永久链接。
 
@@ -218,7 +227,7 @@ permalink_pinyin:
 
 > **注**：除了此插件外，[hexo-abbrlink](https://github.com/rozbo/hexo-abbrlink) 插件也可以生成非中文的链接。
 
-##### 9.文章字数统计插件(可选)
+###### 9.文章字数统计插件(可选)
 
 如果你想要在文章中显示文章字数、阅读时长信息，可以安装 [hexo-wordcount](https://github.com/willin/hexo-wordcount)插件。
 
@@ -238,7 +247,7 @@ wordCount:
   totalCount: true
 ```
 
-##### 10.添加 RSS 订阅支持(可选)
+###### 10.添加 RSS 订阅支持(可选)
 
 本主题中还使用到了 [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) 的 Hexo 插件来做 `RSS`，安装命令如下：
 
@@ -262,11 +271,116 @@ feed:
 
 执行 `hexo clean && hexo g` 重新生成博客文件，然后在 `public` 文件夹中即可看到 `atom.xml` 文件，说明你已经安装成功了。
 
-#### 修改页脚
+
+###### 11.新建 404 页
+
+如果在你的博客 `source` 目录下还没有 `404.md` 文件，那么你就需要新建一个
+
+```bash
+hexo new page 404
+```
+
+编辑你刚刚新建的页面文件 `/source/404/index.md`，至少需要以下内容：
+
+```yaml
+---
+title: 404
+date: 2018-09-30 17:25:30
+type: "404"
+layout: "404"
+description: "Oops～，我崩溃了！找不到你想要的页面 :("
+---
+```
+###### 12.菜单导航配置
+
+(1) 配置基本菜单导航的名称、路径url和图标icon.
+
+1.菜单导航名称可以是中文也可以是英文(如：`Index`或`主页`) 
+2.图标icon 可以在[Font Awesome](https://fontawesome.com/icons) 中查找   
+
+```yaml
+menu:
+  Index:
+    url: /
+    icon: fas fa-home
+  Tags:
+    url: /tags
+    icon: fas fa-tags
+  Categories:
+    url: /categories
+    icon: fas fa-bookmark
+  Archives:
+    url: /archives
+    icon: fas fa-archive
+  About:
+    url: /about
+    icon: fas fa-user-circle
+  Friends:
+    url: /friends
+    icon: fas fa-address-book
+```
+
+(2) 二级菜单配置方法
+
+如果你需要二级菜单则可以在原基本菜单导航的基础上如下操作
+     
+1. 在需要添加二级菜单的一级菜单下添加`children`关键字(如:`About`菜单下添加`children`)     
+2. 在`children`下创建二级菜单的 名称name,路径url和图标icon.      
+3. 注意每个二级菜单模块前要加 `-`.     
+4. 注意缩进格式  
+
+```yaml
+menu:
+  Index:
+    url: /
+    icon: fas fa-home
+  Tags:
+    url: /tags
+    icon: fas fa-tags
+  Categories:
+    url: /categories
+    icon: fas fa-bookmark
+  Archives:
+    url: /archives
+    icon: fas fa-archive
+  About:
+    url: /about
+    icon: fas fa-user-circle-o
+  Friends:
+    url: /friends
+    icon: fas fa-address-book
+  Medias:
+    icon: fas fa-list
+    children:
+      - name: Music
+        url: /music
+        icon: fas fa-music
+      - name: Movies
+        url: /movies
+        icon: fas fa-film
+      - name: Books
+        url: /books
+        icon: fas fa-book
+      - name: Galleries
+        url: /galleries
+        icon: fas fa-image
+```
+执行 `hexo clean && hexo g` 重新生成博客文件，然后就可以在文章中对应位置看到你用`emoji`语法写的表情了。
+
+##### 添加 [DaoVoice](http://www.daovoice.io/) 在线聊天功能
+
+前往 [DaoVoice](http://www.daovoice.io/) 官网注册并且获取 `app_id`，并将 `app_id` 填入主题的 `_config.yml` 文件中。
+
+##### 添加 [Tidio](https://www.tidio.com/) 在线聊天功能
+
+前往 [Tidio](https://www.tidio.com/) 官网注册并且获取 `Public Key`，并将 `Public Key` 填入主题的 `_config.yml` 文件中。
+
+
+##### 修改页脚
 
 页脚信息可能需要做定制化修改，而且它不便于做成配置信息，所以可能需要你自己去再修改和加工。修改的地方在主题文件的 `/layout/_partial/footer.ejs` 文件中，包括站点、使用的主题、访问量等。
 
-#### 修改社交链接
+##### 修改社交链接
 
 在主题的 `_config.yml` 文件中，默认支持 `QQ`、`GitHub` 和邮箱的配置，你可以在主题文件的 `/layout/_partial/social-link.ejs` 文件中，新增、修改你需要的社交链接地址，增加链接可参考如下代码：
 
@@ -291,11 +405,11 @@ feed:
 
 > **注意**: 本主题中使用的 `Font Awesome` 版本为 `4.7.0`。
 
-#### 修改打赏的二维码图片
+##### 修改打赏的二维码图片
 
 在主题文件的 `source/medias/reward` 文件中，你可以替换成你的的微信和支付宝的打赏二维码图片。
 
-#### 配置音乐播放器(可选)
+##### 配置音乐播放器(可选)
 
 要支持音乐播放，就必须开启音乐的播放配置和音乐数据的文件。
 
@@ -341,9 +455,9 @@ music:
   listMaxHeight: # 列表最大高度
 ```
 
-#### 文章 Front-matter 介绍
+##### 文章 Front-matter 介绍
 
-##### 1.Front-matter 选项详解
+###### 1.Front-matter 选项详解
 
 `Front-matter` 选项中的所有内容均为**非必填**的。但我仍然建议至少填写 `title` 和 `date` 的值。
 
@@ -370,7 +484,7 @@ music:
 
 以下为文章的 `Front-matter` 示例。
 
-##### 2.最简示例
+###### 2.最简示例
 
 ```yaml
 ---
@@ -379,7 +493,7 @@ date: 2026-05-023 09:25:00
 ---
 ```
 
-##### 3.最全示例
+###### 3.最全示例
 
 ```yaml
 ---
@@ -401,7 +515,7 @@ tags:
 ---
 ```
 
-#### 自定制修改
+##### 自定制修改
 
 在本主题的 `_config.yml` 中可以修改部分自定义信息，有以下几个部分：
 
@@ -426,7 +540,7 @@ tags:
 
 **我认为个人博客应该都有自己的风格和特色**。如果本主题中的诸多功能和主题色彩你不满意，可以在主题中自定义修改，很多更自由的功能和细节点的修改难以在主题的 `_config.yml` 中完成，需要修改源代码才来完成。以下列出了可能对你有用的地方：
 
-#### 修改主题颜色
+##### 修改主题颜色
 
 在主题文件的 `/source/css/matery.css` 文件中，搜索 `.bg-color` 来修改背景颜色：
 
@@ -445,7 +559,7 @@ tags:
 }
 ```
 
-#### 修改 banner 图和文章特色图
+##### 修改 banner 图和文章特色图
 
 你可以直接在 `/source/medias/banner` 文件夹中更换你喜欢的 `banner` 图片，主题代码中是每天动态切换一张，只需 `7` 张即可。如果你会 `JavaScript` 代码，可以修改成你自己喜欢切换逻辑，如：随机切换等，`banner` 切换的代码位置在 `/layout/_partial/bg-cover-content.ejs` 文件的 `<script></script>` 代码中：
 
@@ -455,7 +569,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
 在 `/source/medias/featureimages` 文件夹中默认有 24 张特色图片，你可以再增加或者减少，并需要在 `_config.yml` 做同步修改。
 
-#### 版本记录
+##### 版本记录
 
 - V1.0.0
   - 新增了所有基础功能；
