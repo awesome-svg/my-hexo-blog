@@ -14,7 +14,7 @@ var myprojects = theme.myProjects.data;
 			<style>
 				@font-face {
 				  font-family: 'myFont';
-				  src: url('../../../source/font/Courier_New_Bold.ttf');
+				  src: url('/font/Courier_New_Bold.ttf');
 				}
 
 				body {
@@ -213,7 +213,6 @@ var myprojects = theme.myProjects.data;
 					transform: translateY(-50%);
 					width: 6px;
 					height: 25px;
-					//background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
 					border-radius: 3px;
 				}
 				
@@ -225,8 +224,8 @@ var myprojects = theme.myProjects.data;
 				.info-grid {
 					display: grid;
 					grid-template-columns: repeat(2, 1fr);
-					gap: 15px;
-					margin-left:35%;
+					gap: 10px;
+					margin-left:30%;
 				}
 				.info-card {
 					padding: 2px;
@@ -248,53 +247,29 @@ var myprojects = theme.myProjects.data;
 			
 				.info-card:hover {
 					transform: translateY(-3px);
-					//box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 				}
 				
 				.parent-container{
 					display: grid;
-					grid-template-columns: repeat(2, 1fr);
+					grid-template-columns: 3fr 4fr;
 				}
+				
 				
 				.skill-container {
 					display: grid;
-					grid-template-columns: repeat(2, 1fr);
-					gap: 10px;
+					grid-template-columns: 2fr 3fr;
+					gap: 5px;
 					margin-top: 10px;
-					margin-right: 66%;
 				}
 				
 				.skill-item {
 					position: relative;
-					width: 150px;
-					height: 150px;
-					margin: 0 25px;
+					width: 130px;
+					height: 130px;
+					margin: 0 5px;
 					border-radius: 50%;
-					//background: #2c3e50;
-					//box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 				}
 				
-				/* 不同百分比的圆环 */
-				.ring-93 {
-					--percentage: 0.93;
-					--color:yellow;
-				}
-
-				.ring-96 {
-					--percentage: 0.96;
-					--color:yellow;
-				}
-				.ring-98 {
-					--percentage: 0.98;
-					--color:yellow;
-				}
-
-				.ring-99 {
-					--percentage: 0.99;
-					--color:yellow;
-				}
-				
-				/* 创建外层圆环 */
 				.skill-item::before {
 					content: '';
 					position: absolute;
@@ -303,15 +278,22 @@ var myprojects = theme.myProjects.data;
 					width: 100%;
 					height: 100%;
 					border-radius: 50%;
-					background: conic-gradient(#3498db 0 93%, #ecf0f1 93% 100%);
-					/*background: conic-gradient(
-						#3498db 0% , 93% /* 使用CSS变量会更灵活，但此处直接写值 */
-						#ecf0f1 93% 100%
-					);*/
 					z-index: 1;
 				}
-
-				/* 创建内层白色圆 var(--percentage)*/
+				
+				.skill-item-93::before {
+				  background: conic-gradient(#e67e22 0 93%, #ffffff 93% 100%);
+				}
+				.skill-item-96::before {
+				  background: conic-gradient(#9b30ff 0 96%, #ffffff 96% 100%);
+				}
+				.skill-item-98::before {
+				  background: conic-gradient(#3498db 0 98%, #ffffff 98% 100%);
+				}
+				.skill-item-99::before {
+				  background: conic-gradient(#2ecc71 0 99%, #ffffff 99% 100%);
+				}
+				
 				.skill-item::after {
 					content: '';
 					position: absolute;
@@ -323,15 +305,13 @@ var myprojects = theme.myProjects.data;
 					background: white;
 					border-radius: 50%;
 					z-index: 2;
-					//box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+					box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 				}
 				
-				/* 隐藏原始进度条 */
 				.progress-bar {
 					display: none;
 				}
 				
-				/* 居中显示技能名称和百分比 */
 				.skill-header {
 					position: absolute;
 					top: 50%;
@@ -359,22 +339,21 @@ var myprojects = theme.myProjects.data;
 					font-weight: 700;
 					color: #3498db;
 				}
-				
-				/* 添加动画效果 */
+			
 				.skill-item {
 					animation: fadeIn 0.8s ease-out, scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-				}
-				
+				}	
+
 				.skill-list{
 					margin-top: 10px;
-					margin-left: -20px;
+					margin-left: 8px;
 				}
 				.skill-list li {
 					font-size: 15px;
 					margin-left：10px；
 					color: #4b5563;
 					line-height: 30px;
-					//transition: all 0.3s ease;
+					transition: all 0.3s ease;
 				}
 				
 				.skill-list li:last-child {
@@ -390,13 +369,12 @@ var myprojects = theme.myProjects.data;
 				
 				.timeline-item {
 					position: relative;
-					//padding-left: 40px;
-					//margin-bottom: 35px;
 					display: grid;
 					padding:2px;
+					padding-top:0;
 					grid-template-columns: 27%  73%;
 					grid-template-rows: 27%  73%;
-					gap: 0;
+					gap: 10px;
 				}
 
 				.timeline-summary {
@@ -410,8 +388,8 @@ var myprojects = theme.myProjects.data;
 					align-items: center;
 					background-color: #409eff;
 					color: white;
-					margin-right: 2px;
-					margin-left: 50px; /* 仅为了演示间距 */
+					margin-right: 3px;
+					margin-left: 30px; 
 					margin-top: 32px;
 					box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 					
@@ -440,7 +418,7 @@ var myprojects = theme.myProjects.data;
 				  
 				
 				.timeline-content {
-					//background: #f8fafc;
+					
 					margin:0 5px 2px 0;
 					justify-content: center;
 					align-items: center;
@@ -473,7 +451,6 @@ var myprojects = theme.myProjects.data;
 				}
 				
 				.timeline-period {
-					//background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
 					color: white;
 					padding: 6px 16px;
 					border-radius: 20px;
@@ -497,22 +474,7 @@ var myprojects = theme.myProjects.data;
 					margin-bottom: 10px;
 				}
 				
-				.tag {
-					background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-					color: #1e40af;
-					padding: 2px 3px;
-					border-radius: 20px;
-					font-size: 15px;
-					font-weight: 500;
-					margin-left:30px;
-					transition: all 0.3s ease;
-				}
-				
-				.tag:hover {
-					background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-					color: white;
-					transform: translateY(-2px);
-				}
+
 				
 				.sidebar-nav {
 					position: fixed;
@@ -755,47 +717,47 @@ var myprojects = theme.myProjects.data;
 						</div>
 						<div class="parent-container">
 							<div class="skill-container">
-								<div class="skill-item">
+								<div class="skill-item skill-item-98" style="data-percent:98;">
 									<div class="skill-header">
 										<span class="skill-name">C#</span>
 										<span class="skill-percent">98%</span>
 									</div>
 									<div class="progress-bar">
-										<div class="progress-fill ring-98" style="width: 98%;"></div>
+										<div class="progress-fill" style="width: 98%;"></div>
 									</div>
 								</div>
 
-								<div class="skill-item">
+								<div class="skill-item skill-item-93" >
 									<div class="skill-header">
 										<span class="skill-name">Java</span>
 										<span class="skill-percent">93%</span>
 									</div>
 									<div class="progress-bar">
-										<div class="progress-fill ring-93" style="width: 93%;"></div>
+										<div class="progress-fill" style="width: 93%;"></div>
 									</div>
 								</div>
 
-								<div class="skill-item">
+								<div class="skill-item skill-item-96">
 									<div class="skill-header">
 										<span class="skill-name">HTML/CSS</span>
 										<span class="skill-percent">96%</span>
 									</div>
 									<div class="progress-bar">
-										<div class="progress-fill ring-96" style="width: 96%;"></div>
+										<div class="progress-fill" style="width: 96%;"></div>
 									</div>
 								</div>
 
-								<div class="skill-item">
+								<div class="skill-item skill-item-99" >
 									<div class="skill-header">
 										<span class="skill-name">Oracle</span>
 										<span class="skill-percent">99%</span>
 									</div>
 									<div class="progress-bar">
-										<div class="progress-fill  ring-99" style="width: 99%;"></div>
+										<div class="progress-fill"></div>
 									</div>
 								</div>
 							</div>
-
+							
 							<ol class="skill-list">
 								<li>熟练使用 Java，基于 SSH 能快速搭建系统框架</li>
 								<li>熟练使用 Java，基于 Spring Boot 能快速搭建系统框架</li>
@@ -807,13 +769,13 @@ var myprojects = theme.myProjects.data;
 							</ol>
 						</div>
 					</section>
-
+					
 				
 					<section class="content-section" id="education">
 				
 						<h2 class="section-title">教育经历</h2>
 						<div class="quote-box" style="">
-							<p class="quote-text" style="color: #065f46;margin:-20px 20px 25px 30px;padding-bottom:3px;">
+							<p class="quote-text" style="color: #065f46;margin:-20px 20px 18px 30px;padding-bottom:2px;">
 								<i class="fas fa-book-open mr-3"></i>
 								学则智，不学则愚；学则治，不学则乱。自古圣贤，成大业，未有不由学而成者。
 							</p>
@@ -832,7 +794,7 @@ var myprojects = theme.myProjects.data;
 								<div class="timeline-description">
 								<p>学习技能:</p>
 								<p>大学四年时间完成了所有的学业，并参与了很多项目研发工作，配合老师和同学攻关了很多难题。</p>
-								<ol class="tag">
+								<ol class="tag" style="padding-left:20px;">
 									<li>掌握了办公五剑客，Word,PPT,Excel,PS,Visio。</li>
 									<li>掌握了C#和Java的前后端开发，数据库基本运用。</li>
 								</ol>
@@ -853,7 +815,7 @@ var myprojects = theme.myProjects.data;
 								<div class="timeline-description">
 								<p>学习技能:</p>
 								<p>参加了一年的 JAVA 培训班，跟着老师一起做了多个项目。积累了很多经验，有了很多经历。</p>
-								<ol class="tag">
+								<ol class="tag" style="padding-left:20px;">
 									<li>掌握了Spring Boot框架下的api开发，并开发了一套自己的数据接口。</li>
 									<li>掌握了ssm框架下的前后端开发，并开发了自己的博客。</li>
 								</ol>
@@ -913,64 +875,15 @@ var myprojects = theme.myProjects.data;
 					</section>
 				</div>
 			</div>
-
+			
+			
 			<script>
 
-			
-		let skillsAnimated = true;
+
+
+		</script>
 		
-		function animateSkills() {
-			if (skillsAnimated) return;
-			
-			const skillsSection = document.getElementById('skills');
-			if (!skillsSection) return;
-			
-			const sectionTop = skillsSection.offsetTop;
-			const sectionHeight = skillsSection.clientHeight;
-			const viewportTop = window.pageYOffset;
-			const viewportHeight = window.innerHeight;
-			
-		
-			if (viewportTop + viewportHeight * 0.75 >= sectionTop) {
-				skillsAnimated = true;
-				
-				const skillItems = document.querySelectorAll('.skill-item');
-				const progressBars = document.querySelectorAll('.progress-fill');
-				
-
-				skillItems.forEach((item, index) => {
-					setTimeout(() => {
-						item.classList.add('animated');
-					}, index * 150);
-				});
-				
-				progressBars.forEach((bar, index) => {
-					const targetWidth = bar.getAttribute('data-width');
-					setTimeout(() => {
-						bar.style.width = targetWidth;
-						bar.classList.add('animate');
-					}, 300 + index * 150);
-				});
-			}
-		}
-
-				window.addEventListener('load', () => {
-					const progressBars = document.querySelectorAll('.progress-fill');
-					progressBars.forEach(bar => {
-						const width = bar.style.width;
-						bar.setAttribute('data-width', width);
-						bar.style.width = '0';
-					});
-					
-					animateSkills();
-				});
-
-				window.addEventListener('scroll', () => {
-					animateSkills();
-				});
-			</script>
-		</body>
-			
+		</body>	
 		</div>
 	</div>
 </div>
