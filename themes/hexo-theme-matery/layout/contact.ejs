@@ -1,44 +1,275 @@
-<%- partial('_partial/bg-cover') %>
 
-<main class="content">
-    <div id="contact" class="container chip-container">
-        <div class="card">
-            <div class="card-content">
-                <div class="tag-title center-align">
-                    <i class="fas fa-comments"></i>&nbsp;&nbsp;<%= __('contact') %>
+<!-- 引入标准文章封面局部模板 -->
+<%- partial('_partial/post-cover') %>
+
+<!-- 使用 <main> 标签包裹主要内容区域 -->
+<main class="container card-content">
+    <div class="row">
+        <!-- 响应式栅格布局：居中显示内容区域
+		【居中控制核心】
+           s12: 手机端占满全宽 (自然居中)
+           m12: 平板端占满全宽 (自然居中)
+           l10: 桌面端占 10/12 宽度 (较宽，阅读舒适)
+           offset-l1: 桌面端左侧偏移 1 列，配合 l10 实现左右对称居中
+           
+           如果想要更宽，改为: class="col s12 m12 l12" (全宽，无需 offset)
+           如果想要更窄，改为: class="col s12 m10 l8 offset-m1 offset-l2"
+		-->
+        <div class="col s12 m12 l10 offset-l1">
+            
+            <!-- 第一部分：留言头部、头像（左侧）、提示语及页面自定义内容 -->
+            <div class="card">
+                <div class="card-content">
+                    
+                    <!-- 
+                       留言头部区域：Flex布局实现左图右文，整体在卡片中视觉平衡 
+                       justify-content: center 确保整个图文块在卡片水平居中（如果容器宽于内容）
+                       但通常我们希望头像紧贴左侧，文字紧随其后，所以这里主要靠 flex 排列
+                    -->
+                    <div style="display: flex; align-items: center; margin-bottom: 20px; justify-content: flex-start;">
+                        <!-- 
+                           头像显示：
+                           固定大小，圆形，阴影
+                           flex-shrink: 0 防止头像被压缩
+                        -->
+                        <img src="<%= theme.profile.avatar || '/images/avatar.png' %>" 
+                             alt="博主头像" 
+                             class="circle responsive-img" 
+                             style="width: 90px; height:90px; margin-right: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); flex-shrink: 0;">
+                        
+                        <!-- 文字内容容器：占据剩余空间，内部文字左对齐或根据需求调整 -->
+                        <div style="flex-grow: 1; text-align: center;">
+                            <!-- 留言板标题 -->
+                            <h4 style="margin-top: 0; margin-bottom: 5px; font-weight: bold; color: #333; font-size: 1.5rem;">
+                                <%= __('contact') %>
+                            </h4>
+                            
+                            <!-- 关键样式说明：
+                               1. background: linear-gradient(...) 定义渐变颜色
+                               2. -webkit-background-clip: text 将背景裁剪为文字形状
+                               3. color: transparent 将文字本身颜色设为透明，从而显示背景渐变
+                               4. font-weight: 500 稍微加粗，使渐变更明显
+							 -->
+                             <p style="margin: 0; font-size: 1.05rem; line-height: 1.6; font-weight: 500;
+                                      background: linear-gradient(45deg, #2196F3, #9C27B0); 
+                                      -webkit-background-clip: text;
+                                      -webkit-text-fill-color: transparent;
+                                      background-clip: text;
+                                      color: transparent;">
+                                嗨！很高兴你能来到这里。<br>
+                                无论是技术交流、生活分享，还是简单的打招呼，都欢迎留下你的足迹。
+                            </p>
+                            
+                            <!-- 次要提示语（保持灰色，不渐变，形成对比） -->
+                            <p style="margin-top: 8px; font-size: 0.9rem; color: #888;">
+                                我会认真阅读每一条留言并尽快回复! ✨
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 视觉分隔线 -->
+                    <div class="divider" style="margin: 20px 0;"></div>
+                    
+                    <!-- 
+                       页面正文内容渲染：
+                       如果在 source/contact/index.md 中编写了 Markdown 内容，将在此处显示
+                       默认左对齐，符合阅读习惯
+                    -->
+                    <% if (page.content) { %>
+                    <div class="post-content" style="padding-top: 10px; text-align: left;">
+                        <%- page.content %>
+                    </div>
+                    <% } %>
+                    
                 </div>
-                <%- page.content %>
             </div>
-        </div>
-        <div class="card">
-            <% if (theme.gitalk && theme.gitalk.enable) { %>
-            <%- partial('_partial/gitalk') %>
-            <% } %>
-
-            <% if (theme.gitment.enable) { %>
-            <%- partial('_partial/gitment') %>
-            <% } %>
-
-            <% if (theme.disqus.enable) { %>
-            <%- partial('_partial/disqus') %>
-            <% } %>
-
-            <% if (theme.livere && theme.livere.enable) { %>
-            <%- partial('_partial/livere') %>
-            <% } %>
-
-            <% if (theme.valine && theme.valine.enable) { %>
-            <%- partial('_partial/valine') %>
-            <% } %>
 			
-			<% if (theme.minivaline && theme.minivaline.enable) { %>
-            <%- partial('_partial/minivaline') %>
-            <% } %>
+			<!-- 【新增】第二部分：隐私与填写规范提示卡片 -->
+            <div class="card" style="background-color: #f9f9f9; border-left: 5px solid #2196F3;">
+                <div class="card-content">
+                    <span class="card-title grey-text text-darken-4" style="font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; display: block;">
+                        <i class="fas fa-shield-alt" style="color: #2196F3; margin-right: 8px;"></i>留言须知 & 隐私保护
+                    </span>
+                    
+                    <ul class="collection with-header" style="border: none; margin: 0; box-shadow: none;">
+                        <li class="collection-item" style="padding-left: 0; padding-right: 0; border-bottom: 1px dashed #eee;">
+                            <div style="display: flex; align-items: start;">
+                                <i class="fas fa-envelope grey-text" style="margin-right: 10px; margin-top: 3px;"></i>
+                                <div>
+                                    <strong>关于邮箱：</strong>
+                                    <span class="grey-text text-darken-1">邮箱仅用于接收回复通知和显示 Gravatar 头像，<strong>绝不会</strong>公开显示或用于垃圾邮件发送。</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="collection-item" style="padding-left: 0; padding-right: 0; border-bottom: 1px dashed #eee;">
+                            <div style="display: flex; align-items: start;">
+                                <i class="fas fa-user-secret grey-text" style="margin-right: 10px; margin-top: 3px;"></i>
+                                <div>
+                                    <strong>隐私保护：</strong>
+                                    <span class="grey-text text-darken-1">请勿在留言中包含密码、身份证号等敏感个人信息。本站不会收集您的任何非必要隐私数据。详细的数据处理规则请查看
+                                        <a href="/privacy" target="_blank" style="color: #2196F3; text-decoration: underline;">《隐私政策》</a>。
+									</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="collection-item" style="padding-left: 0; padding-right: 0; border: none;">
+                            <div style="display: flex; align-items: start;">
+                                <i class="fas fa-check-circle grey-text" style="margin-right: 10px; margin-top: 3px;"></i>
+                                <div>
+                                    <strong>文明交流：</strong>
+                                    <span class="grey-text text-darken-1">请保持友善与尊重，禁止发布广告、色情、暴力或违法内容。违规留言将被直接删除。</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+			
+			
+            <!-- 第三部分：评论系统挂载区域 -->
+            <div class="card">
+                <div class="card-content">
+                    <!-- 评论区标题 -->
+					<div class="center-align" style="margin-bottom: 28px;">
+						<div style="display: inline-flex; align-items: center; gap: 10px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0;">
+							<i class="fas fa-comments" style="font-size: 1.2rem; color: #42b983;"></i>
+							<h3 style="margin: 0; font-weight: 600; font-size: 1.3rem;
+									   background: linear-gradient(45deg, #42b983, #2196F3);
+									   -webkit-background-clip: text;
+									   -webkit-text-fill-color: transparent;
+									   background-clip: text;
+									   color: transparent;">
+								留下你的留言
+							</h3>
+						</div>
+					</div>
+					
+				
 
-            <% if (theme.changyan && theme.changyan.enable) { %>
-                <%- partial('_partial/changyan') %>
-            <% } %>
+				
 
+    <!-- ---------------------------------------------------------------------------------------------------- ->                
+					<!-- 
+					   评论系统容器：
+					   请根据你在 themes/matery/_config.yml 中启用的评论系统，保留对应的一个 DIV ID
+					-->
+			
+					<% if (theme.gitalk && theme.gitalk.enable) { %>
+						<%- partial('_partial/gitalk') %>
+					<% } %>
+
+					<% if (theme.gitment.enable) { %>
+						<%- partial('_partial/gitment') %>
+					<% } %>
+					
+					<% if (theme.waline.enable) { %>
+						<link rel="stylesheet" type="text/css" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
+						
+						<div id="waline"></div>
+						<script type="module">
+						  import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+						  
+						  init({
+							el: '#waline',
+							serverURL: '<%- theme.waline.serverURL %>',
+							lang: 'zh-CN',
+							locale: {
+							  placeholder: '想对博主说些什么？邮箱仅用于接收回复，不会公开(支持 Markdown)', // 修改占位符
+							  nick: '昵称',
+							  mail: '邮箱',
+							  link: '网站',
+							  sofa: '还没有留言，快来成为第一个留下足迹的人吧！', // 修改空状态提示
+							 
+							},
+							path: '/contact', // 固定路径，隔离数据
+							meta: ['nick', 'mail'],
+							reaction: false, // 隐藏点赞按钮（留言通常不需要点赞）
+							emoji: [
+							  'https://unpkg.com/@waline/emojis@1.2.0/weibo',
+							  'https://unpkg.com/@waline/emojis@1.2.0/alus',
+							  'https://unpkg.com/@waline/emojis@1.2.0/bilibili',
+							  'https://unpkg.com/@waline/emojis@1.2.0/qq',
+							  'https://unpkg.com/@waline/emojis@1.2.0/tieba',
+							  'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji',
+							],
+							pageview: false, // 留言板不需要显示浏览量
+							requiredMeta: ['nick', 'mail'], // 必填项：昵称和邮箱
+							dark: 'html[data-theme="dark"]', // 适配 Matery 的深色模式
+						  });
+						</script>
+						
+					<% } %>
+
+					<% if (theme.disqus.enable) { %>
+						<%- partial('_partial/disqus') %>
+					<% } %>
+
+					<% if (theme.livere && theme.livere.enable) { %>
+						<%- partial('_partial/livere') %>
+					<% } %>
+
+					<% if (theme.valine && theme.valine.enable) { %>
+						<%- partial('_partial/valine') %>
+					<% } %>
+					
+					<% if (theme.minivaline && theme.minivaline.enable) { %>
+						<%- partial('_partial/minivaline') %>
+					<% } %>
+					
+					<% if (theme.changyan && theme.changyan.enable) { %>
+						<%- partial('_partial/changyan') %>
+					<% } %>
+					
+                </div>
+				
+				<style>
+					/* 针对留言板页面的特定样式覆盖 */
+#waline {
+  /* 增加内边距，让它看起来像一个独立的卡片区域 */
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+/* 隐藏 Waline 的点赞按钮（像私信一样，不需要赞） */
+#waline .wl-reaction {
+  display: none !important;
+}
+
+/* 隐藏评论者的 IP 属地和浏览器信息（保护隐私感） */
+#waline .wl-meta-item {
+  display: none !important;
+}
+
+/* 隐藏“发送”按钮旁边的表情图标（可选，让界面更严肃） */
+#waline .wl-emoji-popup {
+  display: none !important;
+}
+
+/* 调整输入框样式，使其更像表单 */
+#waline .wl-editor {
+  min-height: 120px; /* 增加高度，鼓励多写内容 */
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+/* 隐藏点赞数和点赞按钮 */
+#waline .wl-like,
+#waline .wl-reaction-action,
+#waline .wl-comment-action .like {
+  display: none !important;
+}
+
+#waline .wl-editor:focus {
+  background-color: #fff;
+  border-color: #42b983;
+  box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.1);
+}
+
+				</style>
+				
+            </div>
         </div>
     </div>
 </main>
