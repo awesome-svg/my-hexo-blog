@@ -20,9 +20,13 @@ menu:
   About:
     url: /about
     icon: fas fa-user-circle
-  Contact:
-    url: /contact
-    icon: fas fa-comments
+    children:
+      - name: AboutMe
+        url: /about
+        icon: fas fa-user-cog
+      - name: Contact
+        url: /contact
+        icon: fas fa-comments
   Friends:
     url: /friends
     icon: fas fa-address-book
