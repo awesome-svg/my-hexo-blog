@@ -194,11 +194,11 @@
     </div>
 </div>
 
-<audio id="audio-player"></audio>
+<audio id="audio-player" referrerpolicy="no-referrer"></audio>
 
 <script>
     const CONFIG = {
-        API_BASE: 'https://api.injahow.cn/meting/',
+        API_BASE: 'https://metingapi.personyzh.cn/api',
         ITEMS_PER_PAGE: 5,
         SONG_LIMIT: 10
     };
@@ -295,8 +295,8 @@
                 if (duration && duration > 1000) duration = Math.floor(duration / 1000); else duration = 0;
                 return {
                     id: song.url || Math.random().toString(36),
-                    name: getField(song, ['name', 'title']) || '未知',
-                    artist: getField(song, ['artist', 'singer']) || '未知',
+                    name: getField(song, ['title']) || '未知',
+                    artist: getField(song, ['author']) || '未知',
                     duration: duration,
                     url: song.url || ''
                 };
@@ -439,6 +439,9 @@
     }
 
     function playSong(song, playlist, index) {
+		
+		
+		
         state.currentSong = song;
         state.currentPlaylist = playlist;
         state.isPlaying = true;
@@ -448,6 +451,11 @@
         
         updatePlayerUI();
         highlightCurrentSong();
+		console.log(song.duration);
+		if (!song.duration) {
+			switchSong(1);
+			return;
+		}
     }
 
     function updatePlayerUI() {

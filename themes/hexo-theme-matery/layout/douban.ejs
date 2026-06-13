@@ -35,6 +35,24 @@
 		opacity: 0.9;
 		font-style: italic;
 	}
+	
+	 /* 强制豆瓣页面容器居中并限制宽度 */
+    @media only screen and (min-width: 992px) {
+        /* 针对包含豆瓣内容的特定列进行强制约束 */
+        .pd-header > .col.l8 {
+            float: none !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            width: 66.6667% !important; /* 强制2/3宽度 */
+        }
+    }
+    
+    /* 优化卡片阴影和圆角，使其更像一个独立的居中模块 */
+    .pd-header .card {
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
 
 	/* --- 网格布局系统 (响应式) --- */
 	.douban-items {
@@ -239,35 +257,117 @@
 
 <main class="content">
     <div class="navi-height bg-content pd-header ">
-        <div class="card">
-            <div class="card-content" style="padding: 30px;">
-                <h1 style="margin: 10px 5px 10px 1px;text-align: center;font-size: 2.3rem"><%= page.title %></h1>
-                <%- page.content %>
+		<div class="col s12 m10 l8 offset-l1 offset-m1">
+			 <div class="card hoverable" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+			 <!-- 顶部装饰条：根据类型变色 -->
+                 <% 
+                // 1. 自动识别类型逻辑
+                var isBook = page.path.indexOf('books') !== -1;
+                var isMovie = page.path.indexOf('movies') !== -1;
+
+                // 2. 根据类型设置样式变量
+                var themeColor = '#42b983'; // 默认绿色
+                var iconClass = 'fa-book';
+                var subTitle = '在文字的微光中，丈量世界的宽度与灵魂的深度。';
+                var pageTitle = '我的豆瓣书单';
+
+                if (isMovie) {
+                    themeColor = '#e74c3c'; // 电影红
+                    iconClass = 'fa-film';
+                    subTitle = '每一帧画面，都是对现实生活的温柔逃逸与重构。';
+                    pageTitle = '我的豆瓣影单';
+                } else if (isBook) {
+                    // 保持默认书本设置
+                    pageTitle = '我的豆瓣书单';
+                } else {
+                    // 兜底：如果路径里都没有，尝试用页面标题判断
+                    if (page.title && page.title.indexOf('影') !== -1) {
+                         themeColor = '#e74c3c';
+                         iconClass = 'fa-film';
+                         subTitle = '光影之间，遇见另一个世界';
+                    }
+                }
+            %>
+                <!-- 可选：添加顶部彩色条或背景图 -->
+                <div style="height: 6px; background: linear-gradient(90deg, #42b983, #2c3e50);"></div>
+                
+                <div class="card-content" style="padding: 25px 30px;">
+                    <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap;">
+                        <!-- 图标 -->
+                        <i class="fas fa-book-reader" style="font-size: 2rem; color: #42b983; margin-right: 15px;filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));"></i>
+                        
+                        <!-- 标题文字 -->
+                        <h1 style="margin: 0; font-size: 1.8rem; font-weight: 700; color: #2c3e50; letter-spacing: 1px;">
+                            <%= page.title %>
+                        </h1>
+                    </div>
+                    
+                    <!-- 副标题或描述（可选） -->
+                    <p style="text-align: center; color: #7f8c8d; margin-top: 10px; font-size: 0.95rem;">
+                        <%= subTitle %>
+                    </p>
+                </div>
             </div>
-        </div>
-		 <span style="margin: 10px 10px 10px 36px;color:green;">如果你有好的想法或者内容推荐，欢迎在下面留言！</span>
-       
-        <div class="card">
-            <% if (theme.gitalk && theme.gitalk.enable) { %>
-            <%- partial('_partial/gitalk') %>
-            <% } %>
+			
+			 <!-- 内容区域（豆瓣插件渲染区） -->
+            <div class="card" style="
+                border-radius: 16px; 
+                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                border: none;">
+                <div class="card-content" style="padding: 20px;">
+                    <%- page.content %>
+                </div>
+            </div>
+			
+			 <!-- B. 分隔线 -->
+                <div style="height: 2px; background: #f0f0f0; margin: 0 25px;"></div>
 
-            <% if (theme.gitment.enable) { %>
-            <%- partial('_partial/gitment') %>
-            <% } %>
+                <!-- C. 静态留言提示条 (不可点击) -->
+                <div style="padding: 7px 10px 3px 5px; text-align: left;">
+                    <span style="
+                        display: inline-block;
+                        color: <%= config.color %>; /* 动态跟随主题色 */
+                        font-size: 1rem; 
+                        font-weight: 500;
+                        padding: 10px 20px 5px 20px; 
+                        /* 关键修改：移除 cursor:pointer，改为默认箭头或文本光标 */
+                        cursor: default; 
+                     
+                    " 
+                    /* 关键修改：移除 onmouseover/onmouseout 中的背景变色逻辑，只保留轻微阴影变化或完全静止 */
+                    onmouseover="this.style.boxShadow='0 4px 10px rgba(0,0,0,0.08)';" 
+                    onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.02)';">
+                        <i class="fas fa-pen-nib" style="margin-right: 8px;"></i>
+                        如果你有好的想法或者内容推荐，欢迎在下面评论区留言！
+                    </span>
+                </div>
+		   
+			<div class="card">
+				<% if (theme.gitalk && theme.gitalk.enable) { %>
+				<%- partial('_partial/gitalk') %>
+				<% } %>
 
-            <% if (theme.disqus.enable) { %>
-            <%- partial('_partial/disqus') %>
-            <% } %>
+				<% if (theme.gitment.enable) { %>
+				<%- partial('_partial/gitment') %>
+				<% } %>
+				
+				<% if (theme.waline.enable) { %>
+				<%- partial('_partial/waline') %>
+				<% } %>
 
-            <% if (theme.livere && theme.livere.enable) { %>
-            <%- partial('_partial/livere') %>
-            <% } %>
+				<% if (theme.disqus.enable) { %>
+				<%- partial('_partial/disqus') %>
+				<% } %>
 
-            <% if (theme.valine && theme.valine.enable) { %>
-            <%- partial('_partial/valine') %>
-            <% } %>
-        </div>
+				<% if (theme.livere && theme.livere.enable) { %>
+				<%- partial('_partial/livere') %>
+				<% } %>
+
+				<% if (theme.valine && theme.valine.enable) { %>
+				<%- partial('_partial/valine') %>
+				<% } %>
+			</div>
+		</div>
     </div>
 </main>
 

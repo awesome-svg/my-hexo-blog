@@ -141,16 +141,16 @@ githubEmojis:
 douban:
   id: 295283474  #这个需要修改为你个人的id
   user: AweSone 
-  builtin: false
+  builtin: true
   customize_layout: douban
   dynamic: false
   item_per_page: 6
   meta_max_line: 4
   book:
-      title: '书单｜My books'
+      title: '阅见山河 · 书间日月'
       quote: '那些读过的书，终将成为你的气质和风骨!'
   movie:
-      title: '片单｜My movies'
+      title: '光影流年 · 帧间梦境'
       quote: '看过的电影，现在你还记得吗?'
   games:
       title: 'My Games'

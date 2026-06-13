@@ -1,3 +1,11 @@
+---
+title: 隐私政策
+date: 2026-06-12 10:23:09
+type: "privacy"
+layout: "privacy"
+---
+
+
 # 隐私政策
 
 ## 欢迎与声明

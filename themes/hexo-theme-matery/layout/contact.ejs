@@ -224,48 +224,37 @@
 				
 				<style>
 					/* 针对留言板页面的特定样式覆盖 */
-#waline {
-  /* 增加内边距，让它看起来像一个独立的卡片区域 */
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-}
+					#waline {
+					  /* 增加内边距，让它看起来像一个独立的卡片区域 */
+					  padding: 20px;
+					  background: #fff;
+					  border-radius: 8px;
+					}
+					/* 隐藏 Waline 的点赞按钮（像私信一样，不需要赞） */
+					#waline .wl-reaction {
+					  display: none !important;
+					}
 
-/* 隐藏 Waline 的点赞按钮（像私信一样，不需要赞） */
-#waline .wl-reaction {
-  display: none !important;
-}
+					/* 调整输入框样式，使其更像表单 */
+					#waline .wl-editor {
+					  min-height: 120px; /* 增加高度，鼓励多写内容 */
+					  border: 1px solid #e0e0e0;
+					  border-radius: 6px;
+					  background-color: #f9f9f9;
+					}
 
-/* 隐藏评论者的 IP 属地和浏览器信息（保护隐私感） */
-#waline .wl-meta-item {
-  display: none !important;
-}
+					/* 隐藏点赞数和点赞按钮 */
+					#waline .wl-like,
+					#waline .wl-reaction-action,
+					#waline .wl-comment-action .like {
+					  display: none !important;
+					}
 
-/* 隐藏“发送”按钮旁边的表情图标（可选，让界面更严肃） */
-#waline .wl-emoji-popup {
-  display: none !important;
-}
-
-/* 调整输入框样式，使其更像表单 */
-#waline .wl-editor {
-  min-height: 120px; /* 增加高度，鼓励多写内容 */
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  background-color: #f9f9f9;
-}
-
-/* 隐藏点赞数和点赞按钮 */
-#waline .wl-like,
-#waline .wl-reaction-action,
-#waline .wl-comment-action .like {
-  display: none !important;
-}
-
-#waline .wl-editor:focus {
-  background-color: #fff;
-  border-color: #42b983;
-  box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.1);
-}
+					#waline .wl-editor:focus {
+					  background-color: #fff;
+					  border-color: #42b983;
+					  box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.1);
+					}
 
 				</style>
 				
