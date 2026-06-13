@@ -106,8 +106,14 @@ api: 'https://your-project-name.vercel.app'
 ```
 至此:自建的API就完成了，
 
-
-
+测试API接口(在浏览器中打开):
+netease：
+  > https://metingapi.personyzh.cn/api?server=netease&type=playlist&id=7696612212
+  >
+  
+QQ音乐:
+  > https://metingapi.personyzh.cn/api?server=tencent&type=playlist&id=7060350461
+  >
 
 
 

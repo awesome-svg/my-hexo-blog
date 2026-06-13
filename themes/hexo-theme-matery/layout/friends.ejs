@@ -282,7 +282,8 @@
 					</div>
 				</div>
 				
-				<!-- ==================== 动态统计与底部文字 End ==================== -->	
+				<!-- ==================== 动态统计与底部文字 End ==================== -->		
+				
             </div>
         </div>
 
@@ -298,6 +299,10 @@
 
             <% if (theme.gitalk && theme.gitalk.enable) { %>
             <%- partial('_partial/gitalk') %>
+            <% } %>
+			
+			<% if (theme.waline && theme.waline.enable) { %>
+            <%- partial('_partial/waline') %>
             <% } %>
 
             <% if (theme.gitment.enable) { %>
