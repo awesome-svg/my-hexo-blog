@@ -162,3 +162,33 @@ douban_card:
   enable: false
   api_key: YOUR_API_KEY
   user_id: 295283474
+
+
+# 图片懒加载配置
+lazyload:
+  enable: true          # true 开启懒加载, false 关闭懒加载
+  onlypost: false       # true 仅对文章页图片生效, false 对所有页面生效
+  loadingImg: /medias/loading.gif  # 加载中的占位图路径 (可选)
+
+
+# Live2D 看板娘配置
+live2d:
+  enable: true
+  scriptFrom: local # 默认使用本地资源
+  pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)
+  pluginJsPath: lib/ # 脚本文件相对与插件根目录路径
+  pluginModelPath: assets/ # 模型文件相对与插件根目录路径
+  tagMode: false # 标签模式, 是否仅替换 live2d tag 内容而非插入到整个页面
+  debug: false # 是否开启调试模式, 开启后会在控制台打印日志
+  model:
+    use: live2d-widget-model-z16 # 使用的模型名称，可更换
+  display:
+    position: right # 显示位置：left 或 right
+    width: 150 # 模型宽度
+    height: 300 # 模型高度
+    hOffset: 0 # 水平偏移量
+    vOffset: -20 # 垂直偏移量
+  mobile:
+    show: false # 移动端是否显示，建议关闭以节省性能
+  react:
+    opacity: 0.7 # 透明度

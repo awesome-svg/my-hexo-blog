@@ -25,8 +25,17 @@
     <%- partial('_partial/baidu-analytics') %>
     <%- partial('_partial/baidu-push') %>
     <% if (theme.clicklove.enable) { %>
-    <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.clicklove) %>" async="async"></script>
+		<script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.clicklove) %>" async="async"></script>
     <% } %>
+	<% if (theme.fireworks.enable) { %>
+		<script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.fireworks) %>"</script>
+	<% } %>
+	
+	<% if (theme.click_text.enable) { %>
+		<script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.click_text) %>"</script>
+	<% } %>
+	
+	
     <% if (theme.busuanziStatistics && theme.busuanziStatistics.enable) { %>
     <script async src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.busuanzi) %>"></script>
     <% } %>

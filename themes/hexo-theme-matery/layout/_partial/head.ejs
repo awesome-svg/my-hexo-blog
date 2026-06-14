@@ -84,7 +84,41 @@
     <link rel="stylesheet" type="text/css" href="<%- theme.jsDelivr.url %><%- url_for(theme.libs.css.lightgallery) %>">
     <link rel="stylesheet" type="text/css" href="<%- theme.jsDelivr.url %><%- url_for(theme.libs.css.matery) %>">
     <link rel="stylesheet" type="text/css" href="<%- theme.jsDelivr.url %><%- url_for(theme.libs.css.mycss) %>">
+	<script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.jquery) %>"></script>
 	
-    <script src="<%- theme.jsDelivr.url %><%- url_for(theme.libs.js.jquery) %>"></script>
+	<% if (theme.snow.enable) { %>
+		<link rel="stylesheet" href="/css/snow.css">
+		<div id="snowzone"></div> 
+		<script src="/js/snow.js"></script>
+    <% } %>
+	
+	<% if (theme.sakura.enable) { %>
+		<script type="text/javascript">
+			var windowWidth = $(window).width();
+			if (windowWidth > 768) {
+				document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+			}
+		</script>
+	<% } %>
+	
+	<% if (theme.meiqia.enable) { %>
+
+		<script type='text/javascript'>
+		(function(a, b, c, d, e, j, s) {
+			a[d] = a[d] || function() {
+				(a[d].a = a[d].a || []).push(arguments)
+			};
+			j = b.createElement(c),
+				s = b.getElementsByTagName(c)[0];
+			j.async = true;
+			j.charset = 'UTF-8';
+			j.src = 'https://visitor-static.meiqia.com/fe-widget-visitor/loader.js';
+			s.parentNode.insertBefore(j, s);
+		})(window, document, 'script', '_MEIQIA');
+		_MEIQIA('entId', '9a3c1b506ebe0fe83514e8137e8c73ad');
+		</script>
+		
+		<style>	
+	<% } %>
 
 </head>

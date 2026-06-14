@@ -49,10 +49,10 @@ menu:
         icon: fas fa-book-reader
         
 
-# Website start time.
+# Website start time. 运行时间
 # 站点运行开始时间.
 time:
-  enable: false
+  enable: true
   year: 2026 # 年份
   month: 05 # 月份
   date: 16 # 日期
@@ -186,7 +186,7 @@ reward:
 # minCharNumber: Approve copyright information by copying at least how many characters.
 # 是否激活复制文章时追加博客和作者的版权信息.
 copyright:
-  enable: ture
+  enable: true
   minCharNumber: 120 # 至少复制多少个字符就追加版权信息.
   description: 本文章著作权归作者所有，任何形式的转载都请注明出处。
 
@@ -212,11 +212,17 @@ postInfo:
   min2read: true # 文章阅读时长
   readCount: true # 文章阅读次数
 
-# Whether to activate the 'love' effect of clicking on the page.
 # 是否激活点击页面的'爱心'效果，默认激活.
 clicklove:
   enable: true
-
+  
+fireworks:  #烟花特效
+  enable: false
+  
+click_text:  #鼠标文字特效
+  enable: false
+  
+  
 # profile in about page, including avatars, career, and personal introductions.
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
@@ -287,7 +293,6 @@ PhotoVerifyPassword:
   errorMessage: 密码错误，访问拒绝!
   
   
-# Whether to display post-calender in the `archive` page
 # 设置在归档页面中是否显示'文章日历'控件
 postCalendar: true
 
@@ -439,7 +444,7 @@ githubLink:
 # 阅读文章的密码验证功能，如要使用此功能请激活该配置项，并在对应文章的Front-matter中写上'password'的键和加密后的密文即可.
 # 请注意：为了保证密码原文不会被泄露到网页中，文章的密码必须是通过'SHA256'加密的，这样就不会被破解.
 verifyPassword:
-  enable: false
+  enable: true
   promptMessage: 请输入访问本文章的密码
   errorMessage: 密码错误，将返回主页！
 
@@ -493,6 +498,8 @@ libs:
     scrollProgress: /libs/scrollprogress/scrollProgress.min.js
     lightgallery: /libs/lightGallery/js/lightgallery-all.min.js # V1.6.11
     clicklove: /libs/others/clicklove.js
+    fireworks: /js/fireworks.js
+    click_text: /js/click_text.js
     busuanzi: https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js  #默认为/libs/others/busuanzi.pure.mini.js
     aplayer: /libs/aplayer/APlayer.min.js
     dplayer: /libs/dplayer/DPlayer.min.js
@@ -561,22 +568,29 @@ reprint:
   default: cc_by
 
 # DaoVoice online contact
+#国内个人博客、站长(实时在线客服)
 daovoice:
   enable: false
   app_id:
 
 # Tidio online contact
+#适用跨境电商独立站、外贸站点(永久免费版可用，功能受限)
 tidio:
   enable: false
   public_key:
 
-# 腾讯兔小巢，见https://txc.qq.com/
+# 腾讯兔小巢，停止免费服务，见https://txc.qq.com/
 tuxiaochao:
   enable: false
   productId:
+  
+#美洽
+meiqia:
+  enable: false
+  
 #背景canvas-nest
 canvas_nest:
-  enable: false
+  enable: true
   color: 0,0,255 # 线条颜色, 默认: '0,0,0' ；三个数字分别为(R,G,B)，注意用,分割
   pointColor: 0,0,255 # 交点颜色, 默认: '0,0,0' ；三个数字分别为(R,G,B)，注意用,分割
   opacity: 0.7 # 线条透明度（0~1）, 默认: 0.5
@@ -585,7 +599,7 @@ canvas_nest:
 
 # 背景静止彩带.
 ribbon:
-  enable: false
+  enable: true
   size: 150 # 彩带大小, 默认: 90.
   alpha: 0.6 # 彩带透明度 (0 ~ 1), 默认: 0.6.
   zIndex: -1 # 背景的z-index属性，css属性用于控制所在层的位置, 默认: -1.
@@ -683,8 +697,11 @@ bbtime:
  serverURLs: # https://你的api
  
 
+snow: #雪花飘落特效
+  enable: false
 
-
+sakura: #樱花飘落特效
+  enable: true
 
 
 
